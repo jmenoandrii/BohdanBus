@@ -18,18 +18,21 @@ public class Player : MonoBehaviour
     private float _yRotation = 0f;
     private Vector2 _mouseInput;
 
+    [SerializeField]
+    private Vector3 _turnEuler = new(0, 90, 0);
+    [SerializeField]
+    private Vector3 _turnOffset = new(0.6f, 0, 0);
+
     public float _turnSpeed = 5f;
     private Quaternion _originalRotation;
     private Vector3 _originalPosition;
     private bool _isTurningBack = false;
     private bool _isReturning = false;
-    private bool _hasMovedBack = false;
 
-    private void Start()
-    {
-        _originalRotation = transform.rotation;
-        _originalPosition = transform.position;
-    }
+    [SerializeField]
+    private float _distanceRaycast = Mathf.Infinity;
+    [SerializeField]
+    private LayerMask _layerMaskRaycast;
 
     private void Update()
     {
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
         MouseLook();
 
         TurnBack();
+        CheckRaycast();
     }
 
     private void MouseLook()
@@ -64,9 +68,9 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
+            _originalRotation = transform.localRotation;
+            _originalPosition = transform.localPosition;
             _isTurningBack = true;
-            _isReturning = false;
-            _hasMovedBack = false;
         }
 
         if (Input.GetKeyUp(KeyCode.X))
@@ -75,31 +79,35 @@ public class Player : MonoBehaviour
             _isReturning = true;
         }
 
-
-        if (_isTurningBack)
+        if (_isTurningBack || _isReturning)
         {
-            Quaternion targetRotation = _originalRotation * Quaternion.Euler(0, 90, 0);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * _turnSpeed);
+            Quaternion targetRotation = _isTurningBack ? Quaternion.Euler(_turnEuler) : _originalRotation;
+            Vector3 targetPosition = _isTurningBack ? _originalPosition + _turnOffset : _originalPosition;
 
-            if (!_hasMovedBack)
-            {
-                Vector3 offset = new Vector3(0, -0.5f, 0);
-                transform.position += transform.rotation * offset * Time.deltaTime;
-                _hasMovedBack = true;
-            }
-        }
+            transform.SetLocalPositionAndRotation(Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * _turnSpeed), 
+                Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * _turnSpeed));
 
-        if (_isReturning)
-        {
-            transform.position = Vector3.Lerp(transform.position, _originalPosition, Time.deltaTime * _turnSpeed);
-
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, _originalRotation, Time.deltaTime * _turnSpeed);
-
-            if (Vector3.Distance(transform.position, _originalPosition) < 0.1f &&
+            if (_isReturning &&
+                Vector3.Distance(transform.localPosition, _originalPosition) < 0.1f &&
                 Quaternion.Angle(transform.localRotation, _originalRotation) < 0.1f)
             {
                 _isReturning = false;
-                transform.position = _originalPosition;
+            }
+        }
+    }
+
+    private void CheckRaycast()
+    {
+        Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
+        {
+            if (hit.collider.TryGetComponent(out IInteractableObject interactableObject))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactableObject.Interact();
+                }
             }
         }
     }
