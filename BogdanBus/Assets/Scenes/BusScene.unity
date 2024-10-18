@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 76008823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5cec84f974c664c88343dc1125b248, type: 3}
+  m_Script: {fileID: 11500000, guid: 67d8018a3aada4812a40fab5ede45ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isOpen: 0
@@ -735,7 +735,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 036be65d6a54a2548844b54dc985789f, type: 2}
+  - {fileID: 2100000, guid: aeaea6c29c47c4bcaa332b5d52bc44d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 506988245}
   - component: {fileID: 506988248}
   m_Layer: 0
-  m_Name: Door Button
+  m_Name: Front Door Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,8 +940,8 @@ Transform:
   m_GameObject: {fileID: 506988243}
   serializedVersion: 2
   m_LocalRotation: {x: -0.2301073, y: -0, z: -0, w: 0.9731653}
-  m_LocalPosition: {x: 0.085, y: -0.3684, z: 1.2648}
-  m_LocalScale: {x: 0.13847516, y: 0.15691905, z: 0.1437579}
+  m_LocalPosition: {x: 0.038, y: -0.3684, z: 1.2648}
+  m_LocalScale: {x: 0.065426745, y: 0.15691905, z: 0.1437579}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011610121692148296}
@@ -987,7 +987,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d36aea527e27824783b72ffa6d74632, type: 2}
+  - {fileID: 2100000, guid: 28221160df2224c09a15c5cf5b62b16e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1026,12 +1026,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 506988243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402c3c48ba8a63e4091742317f161ecf, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e3ac3acf2b64aceb50542204566d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   doors:
   - {fileID: 1616490624}
-  - {fileID: 76008825}
 --- !u!1 &508137275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,7 +1515,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 036be65d6a54a2548844b54dc985789f, type: 2}
+  - {fileID: 2100000, guid: aeaea6c29c47c4bcaa332b5d52bc44d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1842,6 +1841,7 @@ GameObject:
   - component: {fileID: 1301381063}
   - component: {fileID: 1301381062}
   - component: {fileID: 1301381061}
+  - component: {fileID: 1301381064}
   m_Layer: 0
   m_Name: Gearbox
   m_TagString: Untagged
@@ -1905,7 +1905,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d36aea527e27824783b72ffa6d74632, type: 2}
+  - {fileID: 2100000, guid: 28221160df2224c09a15c5cf5b62b16e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1934,6 +1934,139 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301381059}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1301381064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301381059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa4556e310454f178f7817f3e0bced2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bus: {fileID: 1268463485902773977}
+--- !u!1 &1317775952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317775953}
+  - component: {fileID: 1317775957}
+  - component: {fileID: 1317775956}
+  - component: {fileID: 1317775955}
+  - component: {fileID: 1317775954}
+  m_Layer: 0
+  m_Name: Back Door Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1317775953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317775952}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.2301073, y: -0, z: -0, w: 0.9731653}
+  m_LocalPosition: {x: 0.144, y: -0.3684, z: 1.2648}
+  m_LocalScale: {x: 0.065426745, y: 0.15691905, z: 0.1437579}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9011610121692148296}
+  m_LocalEulerAnglesHint: {x: -26.607, y: 0, z: 0}
+--- !u!114 &1317775954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317775952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e3ac3acf2b64aceb50542204566d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 76008825}
+--- !u!65 &1317775955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317775952}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1317775956
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317775952}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9d9c8176228ca4ded8688079e264cfbc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1317775957
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317775952}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1360528104
 GameObject:
@@ -2187,7 +2320,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1616490622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5cec84f974c664c88343dc1125b248, type: 3}
+  m_Script: {fileID: 11500000, guid: 67d8018a3aada4812a40fab5ede45ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isOpen: 0
@@ -2253,7 +2386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 036be65d6a54a2548844b54dc985789f, type: 2}
+  - {fileID: 2100000, guid: aeaea6c29c47c4bcaa332b5d52bc44d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3378,18 +3511,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9148129615758468321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b975dd11a8e2c24298040a4fc5b9580, type: 3}
+  m_Script: {fileID: 11500000, guid: ac36c91c64d32458bbc4a0731ebc0576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _frontLeftWheel: {fileID: 2637099722492908605}
   _frontRightWheel: {fileID: 2964689582517571435}
   _backLeftWheel: {fileID: 903599827288910882}
   _backRightWheel: {fileID: 2738818644215610907}
-  _acceleration: 2500
+  _acceleration: 4000
   _breakeForce: 600
   _maxTurnAngle: 22
   _brakeSmoothing: 5
-  _maxSpeed: 90
+  _maxSpeed: 80
   _currentSpeed: 0
   _gear: 2
   _isBrakingPedal: 0
@@ -3483,7 +3616,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7920935157640848024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d43665dc6965fd46ba15a4559f3b951, type: 3}
+  m_Script: {fileID: 11500000, guid: 125ccbd00461b4639a6e0c5f48ae6f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sensetivity: {x: 240, y: 1}
@@ -4512,6 +4645,7 @@ Transform:
   - {fileID: 2070516491}
   - {fileID: 1301381060}
   - {fileID: 506988244}
+  - {fileID: 1317775953}
   - {fileID: 7579338892562846763}
   - {fileID: 6929387525135689162}
   - {fileID: 4703288101987493045}

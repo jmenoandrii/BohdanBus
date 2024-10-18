@@ -102,6 +102,18 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
         {
+            if (hit.collider.TryGetComponent(out Gearbox gearbox))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    gearbox.Interact(true);
+                }
+                else if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    gearbox.Interact(false);
+                }
+            }
+
             if (hit.collider.TryGetComponent(out IInteractableObject interactableObject))
             {
                 if (Input.GetKeyDown(KeyCode.E))

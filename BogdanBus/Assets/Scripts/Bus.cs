@@ -45,6 +45,8 @@ public class Bus : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
+    public Gear GearState { get => _gear; }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -64,9 +66,14 @@ public class Bus : MonoBehaviour
 
     private void Acceleration()
     {
+        if (_gear != Gear.Drive && _gear != Gear.Reverse)
+            return;
+
         _curAcceleration = Mathf.Lerp(_curAcceleration, _acceleration * _controlAxis, Time.deltaTime * 2f);
 
-        if (_curAcceleration < 0 || _curBreakingForce > 0)
+        if (_gear == Gear.Reverse)
+            _curAcceleration = -_curAcceleration;
+        else if (_curAcceleration < 0 || _curBreakingForce > 0)
         {
             return;
         }
@@ -84,7 +91,7 @@ public class Bus : MonoBehaviour
         float speedFactor = Mathf.Clamp01(_currentSpeed / _maxSpeed);
         float adjustedBrakeForce = _breakeForce * (1 + (1 - speedFactor));
 
-        if (_curAcceleration < 0)
+        if (_gear != Gear.Reverse && _curAcceleration < 0)
         {
             _curBreakingForce = Mathf.Lerp(_curBreakingForce, _curAcceleration < 0 ? adjustedBrakeForce : 0f, Time.deltaTime * _brakeSmoothing);
         }
@@ -121,7 +128,7 @@ public class Bus : MonoBehaviour
         if (_gear == Gear.Park)
         {
             if (_isBrakingPedal &&
-                newGear == Gear.Reverse || newGear == Gear.Neutral)
+                (newGear == Gear.Reverse || newGear == Gear.Neutral))
             {
                 _gear = newGear;
 
@@ -132,7 +139,7 @@ public class Bus : MonoBehaviour
         if (_gear == Gear.Reverse)
         {
             if (_isBrakingPedal &&
-                newGear == Gear.Park || newGear == Gear.Neutral)
+                newGear == Gear.Park)
             {
                 _gear = newGear;
 
@@ -142,7 +149,8 @@ public class Bus : MonoBehaviour
 
         if (_gear == Gear.Neutral)
         {
-            if (newGear == Gear.Reverse || newGear == Gear.Drive)
+            if (newGear == Gear.Drive || 
+            (newGear == Gear.Park && _isBrakingPedal))
             {
                 _gear = newGear;
 
