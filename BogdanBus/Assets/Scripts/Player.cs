@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMaskRaycast;
 
+    private void Start()
+    {
+        _originalPosition = transform.localPosition;
+    }
+
     private void Update()
     {
         _mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * _sensetivity;
@@ -69,7 +74,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             _originalRotation = transform.localRotation;
-            _originalPosition = transform.localPosition;
             _isTurningBack = true;
         }
 
