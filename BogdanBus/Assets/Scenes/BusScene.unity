@@ -1515,7 +1515,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d9c8176228ca4ded8688079e264cfbc, type: 2}
+  - {fileID: 2100000, guid: 28221160df2224c09a15c5cf5b62b16e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3523,10 +3523,12 @@ MonoBehaviour:
   _maxTurnAngle: 22
   _brakeSmoothing: 5
   _maxSpeed: 80
+  _maxReverseSpeed: 40
   _currentSpeed: 0
-  _gear: 2
+  _gear: 1
   _isBrakingPedal: 0
   _isAcceleratingPedal: 0
+  _temp: 0
 --- !u!136 &1276141424290163608
 CapsuleCollider:
   m_ObjectHideFlags: 0
