@@ -29,6 +29,8 @@ public class Bus : MonoBehaviour
     [SerializeField]
     private float _maxSpeed = 120f;
     [SerializeField]
+    private float _maxReverseSpeed = 60f;
+    [SerializeField]
     private float _currentSpeed;
 
     [SerializeField]
@@ -81,16 +83,33 @@ public class Bus : MonoBehaviour
             return;
         }
 
-        // Змінюємо крутний момент залежно від передачі
+        // Перевірка для режиму Drive
         if (_gear == Gear.Drive)
         {
-            // Прискорення вперед
-            _curAcceleration = Mathf.Lerp(_curAcceleration, _acceleration * _controlAxis, Time.deltaTime * 2f);
+            // Обмеження максимальної швидкості вперед
+            if (_currentSpeed >= _maxSpeed)
+            {
+                _curAcceleration = 0f; // Не прискорюємося далі, якщо досягнуто максимальну швидкість
+            }
+            else
+            {
+                // Прискорення вперед
+                _curAcceleration = Mathf.Lerp(_curAcceleration, _acceleration * _controlAxis, Time.deltaTime * 2f);
+            }
         }
+        // Перевірка для режиму Reverse
         else if (_gear == Gear.Reverse)
         {
-            // Прискорення назад
-            _curAcceleration = Mathf.Lerp(_curAcceleration, -_acceleration * _controlAxis, Time.deltaTime * 2f);
+            // Обмеження максимальної швидкості назад (швидкість тут негативна)
+            if (_currentSpeed >= _maxReverseSpeed)
+            {
+                _curAcceleration = 0f; // Не прискорюємося далі, якщо досягнуто максимальну швидкість
+            }
+            else
+            {
+                // Прискорення назад
+                _curAcceleration = Mathf.Lerp(_curAcceleration, -_acceleration * _controlAxis, Time.deltaTime * 2f);
+            }
         }
 
         // Плавна зміна крутного моменту на колесах
@@ -157,6 +176,9 @@ public class Bus : MonoBehaviour
 
     public bool ShiftGear(Gear newGear)
     {
+        if (_currentSpeed > 1)
+            return false;
+
         if (_gear == Gear.Park)
         {
             if (_isBrakingPedal &&
