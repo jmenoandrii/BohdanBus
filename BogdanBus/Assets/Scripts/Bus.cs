@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Bus;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Bus : MonoBehaviour
@@ -44,6 +45,8 @@ public class Bus : MonoBehaviour
     private bool _isBrakingPedal;
     [SerializeField]
     private bool _isAcceleratingPedal;
+    [SerializeField]
+    private bool _temp;
 
     private float _controlAxis;
 
@@ -76,7 +79,7 @@ public class Bus : MonoBehaviour
 
     private void Acceleration()
     {
-        if (_gear == Gear.Park || _gear == Gear.Neutral)
+        if (_gear == Gear.Park)
         {
             _frontLeftWheel.motorTorque = 0;
             _frontRightWheel.motorTorque = 0;
@@ -120,7 +123,7 @@ public class Bus : MonoBehaviour
     private void Breaking()
     {
         // Якщо передача нейтральна або паркінг, гальмування не відбувається
-        if (_gear == Gear.Neutral || _gear == Gear.Park)
+        if (_gear == Gear.Park)
         {
             _curBreakingForce = 0;
             return; // Виходимо з функції
@@ -176,50 +179,28 @@ public class Bus : MonoBehaviour
 
     public bool ShiftGear(Gear newGear)
     {
-        if (_currentSpeed > 1)
+        if (_currentSpeed > 1 || !_isBrakingPedal)
             return false;
+
+        if (_gear == Gear.Drive && newGear == Gear.Park)
+        {
+            _gear = newGear;
+
+            return true;
+        }
 
         if (_gear == Gear.Park)
         {
-            if (_isBrakingPedal &&
-                (newGear == Gear.Reverse || newGear == Gear.Neutral))
-            {
-                _gear = newGear;
+            _gear = newGear;
 
-                return true;
-            }
+            return true;
         }
 
-        if (_gear == Gear.Reverse)
+        if (_gear == Gear.Reverse && newGear == Gear.Park)
         {
-            if (_isBrakingPedal &&
-                newGear == Gear.Park)
-            {
-                _gear = newGear;
+            _gear = newGear;
 
-                return true;
-            }
-        }
-
-        if (_gear == Gear.Neutral)
-        {
-            if (newGear == Gear.Drive ||
-            (newGear == Gear.Park && _isBrakingPedal))
-            {
-                _gear = newGear;
-
-                return true;
-            }
-        }
-
-        if (_gear == Gear.Drive)
-        {
-            if (newGear == Gear.Neutral)
-            {
-                _gear = newGear;
-
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -228,7 +209,6 @@ public class Bus : MonoBehaviour
     public enum Gear
     {
         Drive,
-        Neutral,
         Park,
         Reverse
     }
