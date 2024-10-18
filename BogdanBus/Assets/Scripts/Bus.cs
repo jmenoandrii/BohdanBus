@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Bus : MonoBehaviour
 {
     [SerializeField]
@@ -16,16 +17,46 @@ public class Bus : MonoBehaviour
     [SerializeField]
     private float _acceleration = 500f;
     [SerializeField]
-    private float _breakingForce = 300f;
+    private float _breakeForce = 300f;
     [SerializeField]
     private float _maxTurnAngle = 15f;
+
+    [SerializeField]
+    private float _brakeSmoothing = 3f;
+
+    [SerializeField] 
+    private float _maxSpeed = 120f;
+    [SerializeField]
+    private float _currentSpeed;
+
+    [SerializeField]
+    private Gear _gear = Gear.Park;
 
     private float _curAcceleration;
     private float _curBreakingForce;
     private float _curTurnAngle;
 
+    [SerializeField]
+    private bool _isBrakingPedal;
+    [SerializeField]
+    private bool _isAcceleratingPedal;
+
+    private float _controlAxis;
+
+    private Rigidbody _rigidbody;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
     private void FixedUpdate()
     {
+        _controlAxis = Input.GetAxis("Vertical");
+        _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
+
+        PedalChecking();
+
         Acceleration();
         Breaking();
         Turning();
@@ -33,26 +64,42 @@ public class Bus : MonoBehaviour
 
     private void Acceleration()
     {
-        _curAcceleration = _acceleration * Input.GetAxis("Vertical");
+        _curAcceleration = Mathf.Lerp(_curAcceleration, _acceleration * _controlAxis, Time.deltaTime * 2f);
 
-        if (_curAcceleration < 0)
+        if (_curAcceleration < 0 || _curBreakingForce > 0)
+        {
             return;
+        }
 
-        _frontLeftWheel.motorTorque = _curAcceleration;
-        _frontRightWheel.motorTorque = _curAcceleration;
+        float speedFactor = Mathf.Clamp01(1f - (_currentSpeed / _maxSpeed));
+        _curAcceleration *= speedFactor;
+
+        _frontLeftWheel.motorTorque = Mathf.Lerp(_frontLeftWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
+        _frontRightWheel.motorTorque = Mathf.Lerp(_frontRightWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
+
     }
 
     private void Breaking()
     {
-        if (Input.GetKey(KeyCode.Space))
-            _curBreakingForce = _breakingForce;
-        else
-            _curBreakingForce = _curAcceleration < 0 ? -_curAcceleration : 0f;
+        float speedFactor = Mathf.Clamp01(_currentSpeed / _maxSpeed);
+        float adjustedBrakeForce = _breakeForce * (1 + (1 - speedFactor));
 
-        _frontLeftWheel.brakeTorque = _curBreakingForce;
-        _frontRightWheel.brakeTorque = _curBreakingForce;
-        _backLeftWheel.brakeTorque = _curBreakingForce;
-        _backRightWheel.brakeTorque = _curBreakingForce;
+        if (_curAcceleration < 0)
+        {
+            _curBreakingForce = Mathf.Lerp(_curBreakingForce, _curAcceleration < 0 ? adjustedBrakeForce : 0f, Time.deltaTime * _brakeSmoothing);
+        }
+        else
+        {
+            _curBreakingForce = 0f;
+        }
+
+        float frontBrakeForce = _curBreakingForce * 0.7f;
+        float rearBrakeForce = _curBreakingForce * 0.3f;
+
+        _frontLeftWheel.brakeTorque = frontBrakeForce;
+        _frontRightWheel.brakeTorque = frontBrakeForce;
+        _backLeftWheel.brakeTorque = rearBrakeForce;
+        _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
     private void Turning()
@@ -61,5 +108,66 @@ public class Bus : MonoBehaviour
 
         _frontLeftWheel.steerAngle = _curTurnAngle;
         _frontRightWheel.steerAngle = _curTurnAngle;
+    }
+
+    private void PedalChecking()
+    {
+        _isAcceleratingPedal = _controlAxis > 0.5f;
+        _isBrakingPedal = _controlAxis < -0.5f;
+    }
+
+    public bool ShiftGear(Gear newGear)
+    {
+        if (_gear == Gear.Park)
+        {
+            if (_isBrakingPedal &&
+                newGear == Gear.Reverse || newGear == Gear.Neutral)
+            {
+                _gear = newGear;
+
+                return true;
+            }
+        }
+
+        if (_gear == Gear.Reverse)
+        {
+            if (_isBrakingPedal &&
+                newGear == Gear.Park || newGear == Gear.Neutral)
+            {
+                _gear = newGear;
+
+                return true;
+            }
+        }
+
+        if (_gear == Gear.Neutral)
+        {
+            if (newGear == Gear.Reverse || newGear == Gear.Drive)
+            {
+                _gear = newGear;
+
+                return true;
+            }
+        }
+
+        if (_gear == Gear.Drive)
+        {
+            if (newGear == Gear.Neutral)
+            {
+                _gear = newGear;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public enum Gear
+    {
+        Drive,
+        Neutral,
+        Park,
+        Reverse
     }
 }

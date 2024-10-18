@@ -88,8 +88,8 @@ public class Player : MonoBehaviour
                 Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * _turnSpeed));
 
             if (_isReturning &&
-                Vector3.Distance(transform.localPosition, _originalPosition) < 0.1f &&
-                Quaternion.Angle(transform.localRotation, _originalRotation) < 0.1f)
+                Vector3.Distance(transform.localPosition, _originalPosition) < 0.05f &&
+                Quaternion.Angle(transform.localRotation, _originalRotation) < 0.05f)
             {
                 _isReturning = false;
             }
