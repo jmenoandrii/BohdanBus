@@ -9,32 +9,9 @@ public class Gearbox : MonoBehaviour, IInteractableObject
     [SerializeField]
     private Bus _bus;
 
-    [Header("TextMesh Letters")]
-    [SerializeField]
-    private TextMeshPro _tmpD;
-    [SerializeField]
-    private TextMeshPro _tmpP;
-    [SerializeField]
-    private TextMeshPro _tmpR;
-
     private Animator _animator;
     private bool _isChange;
     private int _rotationCoef;
-
-    // Тривалість вібрації
-    [SerializeField]
-    private float vibrationDuration = 0.5f;
-
-    // Максимальне зміщення по осі Y
-    [SerializeField]
-    private float maxVibrationOffsetY = 0.1f;
-
-    // Максимальне зміщення по осі X
-    [SerializeField]
-    private float maxVibrationOffsetX = 0.05f;
-
-    // Внутрішня корутина для вібрації
-    private Coroutine vibrationCoroutine;
 
     private void Start()
     {
