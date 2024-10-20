@@ -33,6 +33,7 @@ public class Bus : MonoBehaviour
     private float _maxReverseSpeed = 60f;
     [SerializeField]
     private float _currentSpeed;
+    public float CurrentSpeed { get => _currentSpeed; }
 
     [SerializeField]
     private Gear _gear = Gear.Park;
