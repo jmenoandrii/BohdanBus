@@ -602,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 108928195}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3600001, y: 0.08200002, z: 2.3600068}
+  m_LocalPosition: {x: 1.47, y: 0.08200002, z: 2.3600068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -716,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 220554109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.381, y: 1.708, z: 0}
+  m_LocalPosition: {x: -0.03, y: 1.708, z: 0.29}
   m_LocalScale: {x: 0.53213, y: 0.48942, z: 0.72382}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -904,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 252407824}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.381, y: 1.708, z: 0}
+  m_LocalPosition: {x: -0.01, y: 1.708, z: 0.3}
   m_LocalScale: {x: 0.53213, y: 0.48942, z: 0.72382}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2390,6 +2390,10 @@ MonoBehaviour:
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
   controlPointList: []
+  _speed: 2
+  _deltaBottom: 0.5
+  _deltaForward: 2
+  _goTo: 0
 --- !u!1 &1002012182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,6 +2906,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTaken: 0
+--- !u!1 &1271310616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271310617}
+  m_Layer: 0
+  m_Name: PassengerPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271310617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271310616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9011610121692148296}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1301381059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,6 +3388,10 @@ MonoBehaviour:
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
   controlPointList: []
+  _speed: 2
+  _deltaBottom: 0.5
+  _deltaForward: 2
+  _goTo: 0
 --- !u!4 &1496876559
 Transform:
   m_ObjectHideFlags: 0
@@ -4164,7 +4203,7 @@ Transform:
   m_GameObject: {fileID: 1765575149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.381, y: 1.708, z: 0}
+  m_LocalPosition: {x: -0.02, y: 1.708, z: 0.31}
   m_LocalScale: {x: 0.53213, y: 0.48942, z: 0.72382}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4505,6 +4544,10 @@ MonoBehaviour:
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
   controlPointList: []
+  _speed: 2
+  _deltaBottom: 0.5
+  _deltaForward: 2
+  _goTo: 0
 --- !u!4 &1915000884
 Transform:
   m_ObjectHideFlags: 0
@@ -4897,7 +4940,7 @@ Transform:
   m_GameObject: {fileID: 2060223764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3600001, y: 0.08200002, z: -1.450006}
+  m_LocalPosition: {x: 1.47, y: 0.08200002, z: -1.450006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6585,6 +6628,7 @@ Transform:
   - {fileID: 4703288101987493045}
   - {fileID: 1554782966}
   - {fileID: 1753629872}
+  - {fileID: 1271310617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &9017874398771336480
@@ -6656,6 +6700,7 @@ MonoBehaviour:
   _driverPoint: {fileID: 1002012184}
   _controlPointPool: {fileID: 447964698}
   _seatPointPool: {fileID: 501155902}
+  _passengerPool: {fileID: 1271310616}
 --- !u!1 &9165435067397211056
 GameObject:
   m_ObjectHideFlags: 0
