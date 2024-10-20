@@ -26,7 +26,11 @@ public class BusStop : MonoBehaviour
                 _bus.BusSpeed >= 0);
 
                 if (_passengerList[i].IsInBus)
+                {
+                    _passengerList[i].transform.SetParent(_bus.PassengerPool.transform);
+                    _passengerList[i].canGoToBus = false;
                     _passengerList.RemoveAt(i);
+                }
                 else
                     i++;
                 if (i > _passengerList.Count)
@@ -81,7 +85,6 @@ public class BusStop : MonoBehaviour
 
             // Seat
             List<Seat> freeSeatPointList = _bus.FreeSeatPointList;
-            Debug.Log(freeSeatPointList);
             int index = Random.Range(0, freeSeatPointList.Count);
             passenger.seatPoint = freeSeatPointList[index];
             freeSeatPointList[index].Take();

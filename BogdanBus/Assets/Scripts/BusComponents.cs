@@ -26,6 +26,10 @@ public class BusComponents : MonoBehaviour
     [SerializeField]
     private Transform _seatPointPool;
 
+    [Header("Other")]
+    [SerializeField]
+    private GameObject _passengerPool;
+
 
     // Doors
     public GameObject FrontDoor { get => _frontDoor; }
@@ -52,6 +56,7 @@ public class BusComponents : MonoBehaviour
     }
     // Bus Speed
     public float BusSpeed { get => _bus.CurrentSpeed; }
+    public GameObject PassengerPool { get => _passengerPool; }
 
 
     private void Awake()
