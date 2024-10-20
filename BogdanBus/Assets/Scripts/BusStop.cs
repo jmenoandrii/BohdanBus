@@ -5,31 +5,25 @@ using UnityEngine;
 
 public class BusStop : MonoBehaviour
 {
-    [Header("BusStopTrigers")]
+    [Header("Bus Stop Data")]
     [SerializeField]
-    private bool _isBusHere;
-    [SerializeField]
-    private float _deltaNeighborhood = 0.2f;    // neighborhood of stoped speed (0)
-
-    [Header("PassengerTrigers")]
-    [SerializeField]
-    private bool _canMove;
-    [SerializeField]
-    private bool _isBusStoped;
-    [SerializeField]
-    private bool _isDriverPlaceFree;
+    private Bus _bus = null;
     [SerializeField]
     private Door[] _doorArr;  // 0 - front , 1 - back
+    [SerializeField]
+    private float _deltaNeighborhood = 0.2f;    // neighborhood of stoped speed (0)
+    [SerializeField]
+    private List<Passenger> _passengerList;
 
-    [Header("PassengerPoints")]
+    [Header("Passenger Points")]
     [SerializeField]
     private Transform[] _doorPointArr;  // 0 - front , 1 - back
     [SerializeField]
+    private Transform _driverPoint;
+    [SerializeField]
     private List<Transform> _controlPointList;  // front , center , back
     [SerializeField]
-    private List<Transform> _sitPointList;
-    [SerializeField]
-    private Transform _driverPoint;
+    private List<Transform> _seatFreePointList;
     [SerializeField]
     private bool _isDataGathered;
 
@@ -39,20 +33,45 @@ public class BusStop : MonoBehaviour
         _doorPointArr = new Transform[2];
     }
 
+    private void Update()
+    {
+        foreach (Passenger passenger in _passengerList)
+        {
+            // if bus is stopped
+            passenger.canGoToBus = (_bus.CurrentSpeed <= _deltaNeighborhood &&
+            _bus.CurrentSpeed >= 0);
+
+            // if passenger is in bus -> forget about him
+            if (passenger.IsInBus)
+                _passengerList.Remove(passenger);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Bus bus))
         {
-            _isBusHere = true;
-            
+            _bus = bus;
+
+            // Get: FreeSeatPool
+            GatherFreeSeatPoint(bus);
+
             if (!_isDataGathered)
             {
-                _isDataGathered = GatherPointPool(bus);
-                // Get Doors
+                // Get: DoorPool , DriverPoint , ÑontrolPoint
+                _isDataGathered = GatherGeneralPoint(bus);
+                
+                // Get: Doors
                 _doorArr[0] = bus.transform.Find("__Doors/_FrontDoor").GetComponent<Door>();
                 _doorArr[1] = bus.transform.Find("__Doors/_BackDoor").GetComponent<Door>();
                 if (_doorArr[0] == null || _doorArr[1] == null)
                     _isDataGathered = false;
+
+                // Transfer: Door , DoorPoints , DriverPoints , SeatPoints
+                if (_isDataGathered)
+                {
+                    TransferDataToPassenger();
+                }
             }
         }
     }
@@ -61,14 +80,33 @@ public class BusStop : MonoBehaviour
     {
         if (other.GetComponent<Bus>())
         {
-            _isBusHere = false;
+            _bus = null;
         }
     }
 
-    private bool GatherPointPool(Bus bus)
+    private bool GatherFreeSeatPoint(ref Bus bus)
     {
+        // SitPool
+        Transform sitPointPool = bus.transform.Find("__BusPointPool/__SitPointPool");
+        if (sitPointPool != null)
+        {
+            foreach (Transform sitPoint in sitPointPool)
+            {
+                if (sitPoint.tag == "FreeSeat")
+                    _seatFreePointList.Add(sitPoint);
+            }
+        }
+        else
+            return false;
+
+        return true;
+    }
+
+    private bool GatherGeneralPoint(ref Bus bus)
+    {
+        /* DoorPool , DriverPoint , ÑontrolPoint */
+
         // Clear lists
-        _sitPointList.Clear();
         _controlPointList.Clear();
 
         // DoorPool
@@ -82,13 +120,11 @@ public class BusStop : MonoBehaviour
             return false;
         if (_doorPointArr[0] == null || _doorPointArr[1] == null)
             return false;
-        Debug.Log("DoorPool");
 
         // DriverPoint
         _driverPoint = bus.transform.Find("__BusPointPool/__DriverPoint");
         if (_driverPoint == null)
             return false;
-        Debug.Log("DriverPoint");
 
         // ÑontrolPoint
         Transform controlPointPool = bus.transform.Find("__BusPointPool/__ControlPointPool");
@@ -101,26 +137,34 @@ public class BusStop : MonoBehaviour
         }
         else
             return false;
-        Debug.Log("ÑontrolPoint");
-
-        // SitPool
-        Transform sitPointPool = bus.transform.Find("__BusPointPool/__SitPointPool");
-        if (sitPointPool != null)
-        {
-            foreach (Transform sitPoint in sitPointPool)
-            {
-                _sitPointList.Add(sitPoint);
-            }
-        }
-        else
-            return false;
-        Debug.Log("SitPool");
 
         return true;
     }
 
-    private bool CheckCanMove()
+    private void TransferDataToPassenger()
     {
-        return true;
+        /* Door , DoorPoints , DriverPoints , SeatPoints */
+        
+        foreach (Passenger passenger in _passengerList)
+        {
+            // Door
+            switch (passenger.DoorMark)
+            {
+                case Door.DoorMark.Front:
+                    passenger.doorPoint = _doorPointArr[0]
+                    break;
+                case Door.DoorMark.Back:
+                    break;
+            }
+
+            // Driver
+            passenger.driverPoint = _driverPoint;
+
+            // Seat
+            int randomSeatIndex = Random.Range(0, _seatFreePointList.Count);
+            passenger.seatPoint = _seatFreePointList[randomSeatIndex];
+            _seatFreePointList[randomSeatIndex].tag = "TakenSeat";
+            _seatFreePointList.RemoveAt(randomSeatIndex);
+        }
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField]
-    public bool _isOpen = false;
+    private bool _isOpen = false;
+    public bool IsOpen { get => _isOpen; }
     [SerializeField]
     private GameObject _doorMesh;
 
