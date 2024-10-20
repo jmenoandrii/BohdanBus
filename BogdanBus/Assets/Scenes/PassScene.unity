@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 76008824}
   - component: {fileID: 76008825}
   m_Layer: 0
-  m_Name: BackDoor
+  m_Name: _BackDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,13 +315,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76008823}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.72, y: 0, z: -4.1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7200001, y: 0, z: -4.0999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 312725937}
-  m_Father: {fileID: 9011610121692148296}
+  m_Father: {fileID: 1554782966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &76008825
 MonoBehaviour:
@@ -3034,6 +3034,39 @@ Transform:
   - {fileID: 1317775953}
   m_Father: {fileID: 9011610121692148296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1554782965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554782966}
+  m_Layer: 0
+  m_Name: __Doors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1554782966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554782965}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1616490623}
+  - {fileID: 76008824}
+  m_Father: {fileID: 9011610121692148296}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1561952488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3150,7 +3183,7 @@ GameObject:
   - component: {fileID: 1616490623}
   - component: {fileID: 1616490624}
   m_Layer: 0
-  m_Name: __FrontDoor
+  m_Name: _FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3164,13 +3197,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616490622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.72, y: 0, z: -0.29}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7200001, y: 0, z: -0.29000092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 927653511}
-  m_Father: {fileID: 9011610121692148296}
+  m_Father: {fileID: 1554782966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1616490624
 MonoBehaviour:
@@ -3307,14 +3340,14 @@ MonoBehaviour:
   _isBusHere: 0
   _deltaNeighborhood: 0.2
   _canMove: 0
-  _isDoorOpened: 
   _isBusStoped: 0
   _isDriverPlaceFree: 0
+  _doorArr: []
   _doorPointArr: []
   _controlPointList: []
   _sitPointList: []
   _driverPoint: {fileID: 0}
-  _isPointPoolGathered: 0
+  _isDataGathered: 0
 --- !u!1 &1670446369
 GameObject:
   m_ObjectHideFlags: 0
@@ -5899,8 +5932,7 @@ Transform:
   - {fileID: 7579338892562846763}
   - {fileID: 6929387525135689162}
   - {fileID: 4703288101987493045}
-  - {fileID: 1616490623}
-  - {fileID: 76008824}
+  - {fileID: 1554782966}
   - {fileID: 1753629872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
