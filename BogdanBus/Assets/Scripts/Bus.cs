@@ -46,8 +46,6 @@ public class Bus : MonoBehaviour
     private bool _isBrakingPedal;
     [SerializeField]
     private bool _isAcceleratingPedal;
-    [SerializeField]
-    private bool _temp;
 
     private float _controlAxis;
 

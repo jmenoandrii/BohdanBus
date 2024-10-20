@@ -10,6 +10,8 @@ public class Passenger : MonoBehaviour
     public Door.DoorMark DoorMark { get => _doorMark; }
     [SerializeField]
     public Door door;
+    [SerializeField]
+    public bool hasData;
 
     [Header("Bus Trigers")]
     [SerializeField]
@@ -26,52 +28,60 @@ public class Passenger : MonoBehaviour
     [SerializeField]
     public Transform doorPoint;
     [SerializeField]
-    public Transform driverPoint;
+    public Seat driverPoint;
     [SerializeField]
-    public Transform seatPoint;
-    public bool HasPoint 
-    { 
-        get => doorPoint != null && driverPoint != null && seatPoint != null; 
-    }
+    public Seat seatPoint;
+    [SerializeField]
+    public List<Transform> controlPointList;
 
     private void Update()
     {
+        if (!hasData)
+            return;
+
         if (!_isInBus && canGoToBus && door.IsOpen)
         {
             GoToBus();
         }
-        else if (!_isFarePaid && driverPoint.tag == "FreeSeat")
+        else if (_isInBus && !_isFarePaid && driverPoint.tag == "FreeSeat")
         {
-            _isSitting = false;
             GoToDriver();
         }
-        else if (_isSitting == false)
+        else if (_isInBus && _isSitting == false)
         {
             GoToSeat();
         }
         else
+        {
             Stand();
+        }
     }
 
     private void GoToBus()
     {
-        
+        transform.position = doorPoint.position;
+
+        _isInBus = true;
     }
 
     private void GoToDriver()
     {
-        driverPoint.tag = "TakenSeat";
+        driverPoint.GiveUp();
+        _isSitting = false; // if Passenger sitted before 'GoToDriver'
+
+        transform.position = driverPoint.transform.position;
 
         _isFarePaid = true;
     }
 
     private void GoToSeat()
     {
+        transform.position = seatPoint.transform.position;
+
         _isSitting = true;
     }
 
     private void Stand()
     {
-
     }
 }

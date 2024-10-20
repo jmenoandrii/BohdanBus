@@ -237,9 +237,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62112877}
+  - component: {fileID: 62112878}
   m_Layer: 0
   m_Name: sit_R_1
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,6 +260,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &62112878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62112876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &63688700
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,9 +282,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63688701}
+  - component: {fileID: 63688702}
   m_Layer: 0
   m_Name: sit_L_5
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,6 +305,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &63688702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63688700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &76008823
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +329,7 @@ GameObject:
   - component: {fileID: 76008824}
   - component: {fileID: 76008825}
   m_Layer: 0
-  m_Name: _BackDoor
+  m_Name: BackDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108928196}
   m_Layer: 0
-  m_Name: __FrontDoorPoint
+  m_Name: FrontDoorPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -589,9 +617,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158466841}
+  - component: {fileID: 158466842}
   m_Layer: 0
   m_Name: sit_L_1
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -611,6 +640,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158466842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158466840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &182677644
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +700,6 @@ GameObject:
   - component: {fileID: 220554110}
   - component: {fileID: 220554113}
   - component: {fileID: 220554112}
-  - component: {fileID: 220554111}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -681,27 +722,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1915000884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &220554111
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220554109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &220554112
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -868,7 +888,6 @@ GameObject:
   - component: {fileID: 252407825}
   - component: {fileID: 252407828}
   - component: {fileID: 252407827}
-  - component: {fileID: 252407826}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -891,27 +910,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1496876559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &252407826
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252407824}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &252407827
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1396,7 +1394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 447964698}
   m_Layer: 0
-  m_Name: __ControlPointPool
+  m_Name: ControlPointPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1430,7 +1428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 501155902}
   m_Layer: 0
-  m_Name: __SitPointPool
+  m_Name: SeatPointPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1831,7 +1829,6 @@ GameObject:
   - component: {fileID: 697549832}
   - component: {fileID: 697549835}
   - component: {fileID: 697549834}
-  - component: {fileID: 697549833}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -1854,29 +1851,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1496876559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &697549833
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697549831}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &697549834
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2032,7 +2006,6 @@ GameObject:
   - component: {fileID: 713188438}
   - component: {fileID: 713188441}
   - component: {fileID: 713188440}
-  - component: {fileID: 713188439}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -2055,29 +2028,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 998828247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &713188439
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713188437}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &713188440
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2347,9 +2297,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 945114627}
+  - component: {fileID: 945114628}
   m_Layer: 0
   m_Name: sit_R_2
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2369,6 +2320,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945114628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945114626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &998828246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,13 +2379,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: 0
+  _doorMark: 0
+  door: {fileID: 0}
+  hasData: 0
   _isInBus: 0
-  _canMove: 0
+  canGoToBus: 0
   _isFarePaid: 0
+  _isSitting: 0
   doorPoint: {fileID: 0}
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
+  controlPointList: []
 --- !u!1 &1002012182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,9 +2399,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1002012183}
+  - component: {fileID: 1002012184}
   m_Layer: 0
-  m_Name: __DriverPoint
-  m_TagString: FreeSeat
+  m_Name: DriverPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2453,6 +2422,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1753629872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1002012184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002012182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &1009743219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1180944958}
   m_Layer: 0
-  m_Name: __DoorPointPool
+  m_Name: DoorPointPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2884,9 +2866,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1226223539}
+  - component: {fileID: 1226223540}
   m_Layer: 0
   m_Name: sit_L_3
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2906,6 +2889,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226223540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226223538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &1301381059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,9 +3277,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1419477593}
+  - component: {fileID: 1419477594}
   m_Layer: 0
   m_Name: sit_L_2
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3303,6 +3300,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1419477594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419477592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &1496876557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,13 +3342,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: 0
+  _doorMark: 1
+  door: {fileID: 0}
+  hasData: 0
   _isInBus: 0
-  _canMove: 0
+  canGoToBus: 0
   _isFarePaid: 0
+  _isSitting: 0
   doorPoint: {fileID: 0}
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
+  controlPointList: []
 --- !u!4 &1496876559
 Transform:
   m_ObjectHideFlags: 0
@@ -3365,9 +3379,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537335195}
+  - component: {fileID: 1537335196}
   m_Layer: 0
   m_Name: sit_L_4
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3387,6 +3402,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1537335196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537335194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &1551515811
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,7 +3463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1554782966}
   m_Layer: 0
-  m_Name: __Doors
+  m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3574,7 +3602,7 @@ GameObject:
   - component: {fileID: 1616490623}
   - component: {fileID: 1616490624}
   m_Layer: 0
-  m_Name: _FrontDoor
+  m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3728,20 +3756,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isBusHere: 0
+  _bus: {fileID: 0}
   _deltaNeighborhood: 0.2
   _passengerList:
   - {fileID: 998828248}
   - {fileID: 1496876558}
   - {fileID: 1915000883}
-  _isBusStoped: 0
-  _isDriverPlaceFree: 0
-  _doorArr: []
-  _doorPointArr: []
-  _driverPoint: {fileID: 0}
-  _controlPointList: []
-  _seatFreePointList: []
-  _isDataGathered: 0
+  _isDataTransferred: 0
 --- !u!1 &1670446369
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,9 +3772,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670446370}
+  - component: {fileID: 1670446371}
   m_Layer: 0
   m_Name: sit_C_1
-  m_TagString: FreeSeat
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3773,6 +3795,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501155902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670446371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670446369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a998b0a3091cb4195df761f16ce8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTaken: 0
 --- !u!1 &1690204231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,7 +3925,6 @@ GameObject:
   - component: {fileID: 1721028464}
   - component: {fileID: 1721028467}
   - component: {fileID: 1721028466}
-  - component: {fileID: 1721028465}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -3913,29 +3947,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1915000884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1721028465
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721028463}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1721028466
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4101,7 +4112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1753629872}
   m_Layer: 0
-  m_Name: __BusPointPool
+  m_Name: BusPointPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4137,7 +4148,6 @@ GameObject:
   - component: {fileID: 1765575150}
   - component: {fileID: 1765575153}
   - component: {fileID: 1765575152}
-  - component: {fileID: 1765575151}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -4160,27 +4170,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 998828247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1765575151
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765575149}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1765575152
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4505,13 +4494,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: 0
+  _doorMark: 0
+  door: {fileID: 0}
+  hasData: 0
   _isInBus: 0
-  _canMove: 0
+  canGoToBus: 0
   _isFarePaid: 0
+  _isSitting: 0
   doorPoint: {fileID: 0}
   driverPoint: {fileID: 0}
   seatPoint: {fileID: 0}
+  controlPointList: []
 --- !u!4 &1915000884
 Transform:
   m_ObjectHideFlags: 0
@@ -4889,7 +4882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2060223765}
   m_Layer: 0
-  m_Name: __BackDoorPoint
+  m_Name: BackDoorPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5474,7 +5467,6 @@ MonoBehaviour:
   _gear: 1
   _isBrakingPedal: 0
   _isAcceleratingPedal: 0
-  _temp: 0
 --- !u!136 &1276141424290163608
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6635,8 +6627,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9011610121692148296}
   - component: {fileID: 8150960608079300435}
-  - component: {fileID: 1268463485902773977}
   - component: {fileID: 711882801635818451}
+  - component: {fileID: 1268463485902773977}
+  - component: {fileID: 9148129615758468322}
   m_Layer: 0
   m_Name: Bus
   m_TagString: Untagged
@@ -6644,6 +6637,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9148129615758468322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148129615758468321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6980d25d6cb9e9641b1179e27460138b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frontDoor: {fileID: 1616490622}
+  _backDoor: {fileID: 76008823}
+  _frontDoorPoint: {fileID: 108928196}
+  _backDoorPoint: {fileID: 2060223765}
+  _driverPoint: {fileID: 1002012184}
+  _controlPointPool: {fileID: 447964698}
+  _seatPointPool: {fileID: 501155902}
 --- !u!1 &9165435067397211056
 GameObject:
   m_ObjectHideFlags: 0
