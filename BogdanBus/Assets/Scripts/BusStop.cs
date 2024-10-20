@@ -54,12 +54,12 @@ public class BusStop : MonoBehaviour
             _bus = bus;
 
             // Get: FreeSeatPool
-            GatherFreeSeatPoint(bus);
+            GatherFreeSeatPoint(ref bus);
 
             if (!_isDataGathered)
             {
                 // Get: DoorPool , DriverPoint , ÑontrolPoint
-                _isDataGathered = GatherGeneralPoint(bus);
+                _isDataGathered = GatherGeneralPoint(ref bus);
                 
                 // Get: Doors
                 _doorArr[0] = bus.transform.Find("__Doors/_FrontDoor").GetComponent<Door>();
@@ -151,9 +151,12 @@ public class BusStop : MonoBehaviour
             switch (passenger.DoorMark)
             {
                 case Door.DoorMark.Front:
-                    passenger.doorPoint = _doorPointArr[0]
+                    passenger.doorPoint = _doorPointArr[0];
+                    passenger.door = _doorArr[0];
                     break;
                 case Door.DoorMark.Back:
+                    passenger.doorPoint = _doorPointArr[1];
+                    passenger.door = _doorArr[1];
                     break;
             }
 
