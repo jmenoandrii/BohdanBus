@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField]
-    private bool _isOpen = false;
+    public bool _isOpen = false;
     [SerializeField]
     private GameObject _doorMesh;
 
@@ -30,5 +30,11 @@ public class Door : MonoBehaviour
             Open();
         }
         _doorMesh.SetActive(!_isOpen);
+    }
+
+    public enum DoorMark
+    {
+        Front,
+        Back,
     }
 }
