@@ -4,20 +4,8 @@ using UnityEngine;
 public class BusStop : MonoBehaviour
 {
     [Header("Bus Stop Data")]
-    [SerializeField] private List<Passenger> _passengers;
-    [SerializeField] private Transform _disappearedPointPool;
+    [SerializeField] private List<Passenger> _passengerList;
     private BoardingSystem _busSystem;
-
-    [Header("*** View zone ***")]
-    [SerializeField] private List<Transform> _disappearedPointList;
-    public List<Transform> DisappearedPointList => _disappearedPointList;
-
-
-    private void Awake()
-    {
-        foreach (Transform point in _disappearedPointPool)
-            _disappearedPointList.Add(point);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +16,7 @@ public class BusStop : MonoBehaviour
 
             TransferDataToPassengers();
 
-            foreach (Passenger passenger in _passengers)
+            foreach (Passenger passenger in _passengerList)
             {
                 _busSystem.AddPassengerToBoardingList(passenger);
             }
@@ -49,7 +37,7 @@ public class BusStop : MonoBehaviour
         /*
             Perform it for the passenger if passenger has the 'OnBusStop' state
          */
-        foreach (Passenger passenger in _passengers)
+        foreach (Passenger passenger in _passengerList)
         {
             if (passenger.GetState >= Passenger.State.ReadyBoard)
                 continue;
@@ -64,11 +52,11 @@ public class BusStop : MonoBehaviour
         return passenger.DoorMark == Door.Mark.Front ? _busSystem.FrontDoorPoint : _busSystem.BackDoorPoint;
     }
 
-    public void ForgetAboutPassenger()
+    public void ForgetAboutPassenger(Passenger passenger)
     {
         /*
             If the bus sends a command that all passengers boarded
          */
-        _passengers.Clear();
+        _passengerList.Remove(passenger);
     }
 }

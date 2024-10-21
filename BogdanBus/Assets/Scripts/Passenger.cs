@@ -109,6 +109,7 @@ public class Passenger : MonoBehaviour
                     _state = State.InBus;
                     break;
                 case Destination.ToDriver:
+                    _state = State.Paying;
                     break;
                 case Destination.ToSeat:
                     _state = State.Sitting;
@@ -140,6 +141,11 @@ public class Passenger : MonoBehaviour
         yield return null; 
     }
 
+    public void GoBack()
+    {
+
+    }
+
     public void StandUp()
     {
         _state = State.StandUp;
@@ -156,13 +162,25 @@ public class Passenger : MonoBehaviour
         _state = State.ReadyBoard;
     }
 
-    public void PayedFare()
+    public void GoToDriver()
     {
-        _state = State.FarePaid;
-        _destination = Destination.ToSeat;
-        _driverPoint.GiveUp();
+        _destination = Destination.ToDriver;
     }
 
+    public void PayedFare()
+    {
+
+    }
+
+    public void GoToSeat()
+    {
+        _destination = Destination.ToSeat;
+    }
+
+    public void Left()
+    {
+
+    }
 
     public void SetDataLine(Transform doorPoint, Seat driverPoint, Seat seat, List<Transform> controlPointList)
     {
@@ -194,6 +212,7 @@ public class Passenger : MonoBehaviour
         ReadyBoard,
         BusAccessible,
         InBus,
+        Paying,
         FarePaid,
         Sitting,
         StandUp,

@@ -20,14 +20,13 @@ public class BoardingSystem : MonoBehaviour
 
     [Header("*** View zone ***")]
     [SerializeField] private BusStop _currentBusStop;
-    [SerializeField] private List<Passenger> _passengers = new List<Passenger>();
+    [SerializeField] private List<Passenger> _passengerList = new List<Passenger>();
     [SerializeField] private List<Passenger> _boardingPassengerList = new List<Passenger>();
     [SerializeField] private List<Passenger> _payingPassengerList = new List<Passenger>();
-    [SerializeField] private List<Passenger> _validatedPassengerList = new List<Passenger>();
     private List<Transform> _controlPointList = new List<Transform>();
     private Bus _bus;
 
-    // Doors
+    // Getters
     public bool IsOpenFrontDoor => _frontDoor.IsOpen;
     public bool IsOpenBackDoor => _backDoor.IsOpen;
     public Transform FrontDoorPoint => _frontDoorPoint;
@@ -35,6 +34,7 @@ public class BoardingSystem : MonoBehaviour
     public Seat DriverPoint => _driverPoint;
     public List<Transform> ControlPointList => _controlPointList;
     public float BusSpeed => _bus.CurrentSpeed;
+    // TODO: Maybe isn't needed
     public GameObject PassengerPool => _passengerPool;
 
     private void Awake()
@@ -45,63 +45,97 @@ public class BoardingSystem : MonoBehaviour
 
     private void Update()
     {
+        HandleBoardingPassengers();
         HandlePassengers();
     }
 
-    private void HandlePassengers()
+    private void HandleBoardingPassengers()
     {
-        if (_passengers.Count == 0) return;
+        /*
+                    How do it work?
+            - if '_boardingPassengerList' is empty, handler do nothing
+            - if passenger has 'state' <= 'State.BusAccessible', he go to the bus or whait when can
+            - if passenger has 'state' > 'State.BusAccessible' and still is in '_boardingPassengerList',
+              so he arrived to the bus door and can be transfered to '_passengerList'/'_payingPassengerList'.
+              Also passenger is removed from 'BusStop._passengerList'
+         */
+        if (_boardingPassengerList.Count == 0) return;
 
-        for (int i = _passengers.Count - 1; i >= 0; i--)
+        foreach (Passenger passenger in _boardingPassengerList)
         {
-            Passenger passenger = _passengers[i];
-
             if (passenger.GetState <= Passenger.State.BusAccessible)
             {
-                if (IsReadyForBoarding(passenger))
+                if (CanPassengerEnterOrExit(passenger))
                     passenger.StartBoarding();
                 else
                     passenger.StopBoarding();
             }
-            else if (passenger.GetState == Passenger.State.InBus)
+            else
             {
-                if (!passenger.IsTransfered)
-                {
-                    passenger.transform.SetParent(_passengerPool.transform);
-                    passenger.IsTransfered = true;
-                }
-
-                if (_ticketPrinter.GetState == TicketPrinter.State.Returned)
-                {
-                    passenger.PayedFare();
-                    _ticketPrinter.Reset();
-                }
-            }
-            else if (passenger.GetState == Passenger.State.Sitting)
-            {
-                if (_currentBusStop != null && passenger.GetDestination == _currentBusStop && IsReadyForDisembark(passenger))
-                {
-                    passenger.StandUp();
-                }
-            }
-            else if (passenger.GetState == Passenger.State.LeftBus)
-            {
-                passenger.transform.SetParent(null);
-                _passengers.RemoveAt(i);
+                passenger.transform.SetParent(_passengerPool.transform);
+                _passengerList.Add(passenger);
+                _payingPassengerList.Add(passenger);
+                _currentBusStop.ForgetAboutPassenger(passenger);
             }
         }
     }
 
-    private bool IsReadyForBoarding(Passenger passenger)
+    private void HandlePassengers()
+    {
+        /*
+                    How do it work?
+            - if '_passengerList' is empty, handler do nothing
+            - if '_currentBusStop' is the 'passenger.GetDestination' and he can 
+              performe exiting, he left even if he didn't pay the fare.
+            - if the passenger is first element in '_payingPassengerList',
+              so he go to his driver point
+                - if passenger stand near driver and the '_ticketPrinter' give
+                  the ticket, passenger is removed from '_payingPassengerList'
+                  and go to the seat, because of that next one (who is new first 
+                  passenger in '_payingPassengerList') can go to the driver
+            - if passenger payed the fare or simply isn't first element in 
+              '_payingPassengerList', he go to the seat.
+         */
+        if (_passengerList.Count == 0) return;
+
+        foreach (Passenger passenger in _passengerList)
+        {
+            if (_currentBusStop != null && passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(passenger))
+            {
+                if (passenger.GetState == Passenger.State.LeftBus)
+                {
+                    _passengerList.Remove(passenger);
+                    passenger.transform.SetParent(null);
+                    continue;
+                }
+
+                passenger.Left();
+            }
+
+            if (_payingPassengerList.Count != 0 && passenger == _payingPassengerList[0])
+            {
+                if (passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
+                {
+                    _payingPassengerList.Remove(passenger);
+                    passenger.PayedFare();
+                    _ticketPrinter.Reset();
+                    continue;
+                }
+
+                passenger.GoToDriver();
+            }
+            else
+            {
+                passenger.GoToSeat();
+            }
+        }
+    }
+
+    private bool CanPassengerEnterOrExit(Passenger passenger)
     {
         return BusSpeed <= _deltaSpeed &&
                BusSpeed >= 0 &&
                IsCorrectDoorOpen(passenger);
-    }
-
-    private bool IsReadyForDisembark(Passenger passenger)
-    {
-        return IsCorrectDoorOpen(passenger) && BusSpeed <= _deltaSpeed && BusSpeed >= 0;
     }
 
     private bool IsCorrectDoorOpen(Passenger passenger)
@@ -139,7 +173,7 @@ public class BoardingSystem : MonoBehaviour
     {
         if (passenger == null) return;
 
-        _passengers.Add(passenger);
+        _passengerList.Add(passenger);
         switch (passenger.DoorMark)
         {
             case Door.Mark.Front:
@@ -164,10 +198,12 @@ public class BoardingSystem : MonoBehaviour
             - we forget about passenger, who didn't board the bus
          */
         _currentBusStop = null;
+        foreach (Passenger passenger in _boardingPassengerList)
+        {
+            passenger.GoBack();
+        }
         _boardingPassengerList.Clear();
     }
-
-    //////
 
     public void AddPassengerToBoardingList(Passenger passenger)
     {
