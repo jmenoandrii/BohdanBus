@@ -358,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 25262805}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.2099998, y: -0.739, z: -1.51}
+  m_LocalPosition: {x: 2.4599998, y: -0.739, z: -1.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4233,6 +4233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doorMark: 0
+  _busStopOfDestination: {fileID: 806359742}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
@@ -4240,7 +4241,6 @@ MonoBehaviour:
   _controlPointList: []
   _state: 0
   _destination: 0
-  _busStopOfDestination: {fileID: 806359742}
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
@@ -6199,6 +6199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doorMark: 0
+  _busStopOfDestination: {fileID: 1808129608}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
@@ -6206,7 +6207,6 @@ MonoBehaviour:
   _controlPointList: []
   _state: 0
   _destination: 0
-  _busStopOfDestination: {fileID: 1808129608}
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
@@ -6741,7 +6741,7 @@ Transform:
   m_GameObject: {fileID: 1680648096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.21, y: -0.739, z: 2.24}
+  m_LocalPosition: {x: 2.46, y: -0.739, z: 2.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8278,6 +8278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doorMark: 0
+  _busStopOfDestination: {fileID: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
@@ -8285,7 +8286,6 @@ MonoBehaviour:
   _controlPointList: []
   _state: 0
   _destination: 0
-  _busStopOfDestination: {fileID: 0}
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
