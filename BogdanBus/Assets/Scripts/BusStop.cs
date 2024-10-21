@@ -7,9 +7,9 @@ public class BusStop : MonoBehaviour
 {
     [Header("Bus Stop Data")]
     [SerializeField]
-    private BusComponents _bus = null;
+    private BusLine _bus = null;
     [SerializeField]
-    private float _deltaNeighborhood = 0.2f;    // neighborhood of stoped speed (0)
+    private float _deltaSpeed = 0.2f;
     [SerializeField]
     private List<Passenger> _passengerList;
     [SerializeField]
@@ -22,8 +22,7 @@ public class BusStop : MonoBehaviour
             byte i = 0;
             while (_passengerList.Count != i)
             {
-                _passengerList[i].canGoToBus = (_bus.BusSpeed <= _deltaNeighborhood &&
-                _bus.BusSpeed >= 0);
+                _passengerList[i].canGoToBus = false;
 
                 if (_passengerList[i].IsInBus)
                 {
@@ -42,7 +41,7 @@ public class BusStop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out BusComponents bus))
+        if (other.TryGetComponent(out BusLine bus))
         {
             _bus = bus;
 
@@ -63,34 +62,25 @@ public class BusStop : MonoBehaviour
 
     private void TransferDataToPassenger()
     {
-        /* Door , DoorPoints , DriverPoints , SeatPoints */
-        
         foreach (Passenger passenger in _passengerList)
         {
+            if (passenger.hasData)
+                return;
+
+            Transform doorPoint;
+
             // Door
             switch (passenger.DoorMark)
             {
-                case Door.DoorMark.Front:
-                    passenger.doorPoint = _bus.FrontDoorPoint;
-                    passenger.door = _bus.FrontDoor.GetComponent<Door>();
+                case Door.Mark.Front:
+                    doorPoint = _bus.FrontDoorPoint;
                     break;
-                case Door.DoorMark.Back:
-                    passenger.doorPoint = _bus.BackDoorPoint;
-                    passenger.door = _bus.BackDoor.GetComponent<Door>();
+                case Door.Mark.Back:
+                    doorPoint = _bus.BackDoorPoint;
                     break;
             }
-
-            // Driver
-            passenger.driverPoint = _bus.DriverPoint;
-
-            // Seat
-            List<Seat> freeSeatPointList = _bus.FreeSeatPointList;
-            int index = Random.Range(0, freeSeatPointList.Count);
-            passenger.seatPoint = freeSeatPointList[index];
-            freeSeatPointList[index].Take();
-
-            // Contol points
-            passenger.controlPointList = _bus.ControlPointList;
+            
+            passenger.SetDataLine(doorPoint, _bus.DriverPoint, _bus.GetFreeSeat(), _bus.ControlPointList);
 
             // Cheked
             passenger.hasData = true;

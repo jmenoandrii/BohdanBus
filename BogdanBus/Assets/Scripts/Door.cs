@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
         _doorMesh.SetActive(!_isOpen);
     }
 
-    public enum DoorMark
+    public enum Mark
     {
         Front,
         Back,

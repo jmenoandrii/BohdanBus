@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3364,7 +3364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1496876558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3377,7 +3377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doorMark: 1
+  _doorMark: 0
   door: {fileID: 0}
   hasData: 0
   _isInBus: 0
@@ -3796,7 +3796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bus: {fileID: 0}
-  _deltaNeighborhood: 0.2
+  _deltaSpeed: 0.2
   _passengerList:
   - {fileID: 998828248}
   - {fileID: 1496876558}
@@ -4520,7 +4520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1915000883
 MonoBehaviour:
   m_ObjectHideFlags: 0

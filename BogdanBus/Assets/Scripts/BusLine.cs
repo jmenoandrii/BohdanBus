@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Bus))]
-public class BusComponents : MonoBehaviour
+public class BusLine : MonoBehaviour
 {
     private Bus _bus;
 
@@ -39,21 +39,6 @@ public class BusComponents : MonoBehaviour
     public Transform BackDoorPoint { get => _backDoorPoint; }
     public Seat DriverPoint { get => _driverPoint; }
     public List<Transform> ControlPointList { get => _controlPointList; }
-    public List<Seat> FreeSeatPointList 
-    { 
-        get
-        {
-            List<Seat> freeSeatPointList = new List<Seat>();
-            // Get free seat points
-            foreach (Transform point in _seatPointPool)
-            {
-                Seat seat = point.GetComponent<Seat>();
-                if (!seat.IsTaken)
-                    freeSeatPointList.Add(seat);
-            }
-            return freeSeatPointList;
-        }
-    }
     // Bus Speed
     public float BusSpeed { get => _bus.CurrentSpeed; }
     public GameObject PassengerPool { get => _passengerPool; }
@@ -67,5 +52,21 @@ public class BusComponents : MonoBehaviour
         _controlPointList = new List<Transform>();
         foreach (Transform point in _controlPointPool)
             _controlPointList.Add(point);
+    }
+
+    public Seat GetFreeSeat()
+    {
+        List<Seat> freeSeatPointList = new();
+
+        foreach (Transform point in _seatPointPool)
+        {
+            Seat seat = point.GetComponent<Seat>();
+            if (!seat.IsTaken)
+                freeSeatPointList.Add(seat);
+        }
+
+        int index = Random.Range(0, freeSeatPointList.Count);
+        freeSeatPointList[index].Take();
+        return freeSeatPointList[index];
     }
 }

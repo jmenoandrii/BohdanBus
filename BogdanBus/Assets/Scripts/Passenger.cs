@@ -1,15 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class Passenger : MonoBehaviour
 {
     [Header("Passenger Data")]
     [SerializeField]
-    private Door.DoorMark _doorMark;
-    public Door.DoorMark DoorMark { get => _doorMark; }
-    [SerializeField]
-    public Door door;
+    private Door.Mark _doorMark;
+    public Door.Mark DoorMark { get => _doorMark; }
     [SerializeField]
     public bool hasData;
 
@@ -26,58 +26,63 @@ public class Passenger : MonoBehaviour
 
     [Header("Bus Points")]
     [SerializeField]
-    public Transform doorPoint;
+    private Transform _doorPoint;
     [SerializeField]
-    public Seat driverPoint;
+    private Seat _driverPoint;
     [SerializeField]
-    public Seat seatPoint;
+    private Seat _seatPoint;
     [SerializeField]
-    public List<Transform> controlPointList;
+    private List<Transform> _controlPointList;
 
     [Header("Movement Settings")]
     [SerializeField]
-    private float _speed = 2f; // Швидкість переміщення
+    private float _speed = 2f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     [SerializeField]
-    private float _deltaBottom = 0.5f; // Висота для підйому до дверей
+    private float _deltaBottom = 0.5f; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     [SerializeField]
-    private float _deltaForward = 1f; // Висота для підйому до дверей
+    private float _deltaForward = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private Vector3 targetPosition;
     [SerializeField]
     private GoTo _goTo;
 
     private void Update()
     {
+        Moving();
+    }
+
+    private void Moving()
+    {
         if (!hasData) return;
 
         _goTo = GoTo.None;
 
-        if (!_isInBus && canGoToBus && door.IsOpen)
+        if (!_isInBus && canGoToBus)
         {
             _goTo = GoTo.Bus;
             if (Vector3.Distance(transform.position, targetPosition) > _deltaForward)
-                MoveTo(doorPoint.position - Vector3.up * _deltaBottom);
+                MoveTo(_doorPoint.position - Vector3.up * _deltaBottom);
             else
-                MoveTo(doorPoint.position);
+                MoveTo(_doorPoint.position);
         }
-        else if (_isInBus && !_isFarePaid && !driverPoint.IsTaken)
+        else if (_isInBus && !_isFarePaid && !_driverPoint.IsTaken)
         {
             if (_goTo != GoTo.Driver)
             {
                 Debug.Log($"Take: {this}");
-                driverPoint.Take();
+                _driverPoint.Take();
             }
             _goTo = GoTo.Driver;
-            MoveTo(driverPoint.transform.position);
+            MoveTo(_driverPoint.transform.position);
         }
         else if (_isInBus && !_isSitting)
         {
             if (_isFarePaid && _goTo != GoTo.Seat)
             {
                 Debug.Log($"GiveUp: {this}");
-                driverPoint.GiveUp();
+                _driverPoint.GiveUp();
             }
             _goTo = GoTo.Seat;
-            MoveTo(seatPoint.transform.position);
+            MoveTo(_seatPoint.transform.position);
         }
         else
         {
@@ -89,29 +94,29 @@ public class Passenger : MonoBehaviour
     {
         targetPosition = target;
 
-        // Обчислюємо напрямок до цільової точки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         Vector3 direction = (targetPosition - transform.position).normalized;
 
-        // Плавно переміщуємо пасажира до цільової позиції
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
 
-        // Поворот до цільової точки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (direction != Vector3.zero)
         {
-            // Обчислюємо напрямок руху
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            // Отримуємо тільки Y-значення цільового обертання
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Y-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             float targetYRotation = targetRotation.eulerAngles.y;
 
-            // Створюємо новий кватерніон з попереднім X і Z, але з новим Y
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ X пїЅ Z, пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ Y
             Quaternion smoothRotation = Quaternion.Euler(0, targetYRotation, 0);
 
-            // Затримка повороту
-            transform.rotation = Quaternion.Slerp(transform.rotation, smoothRotation, Time.deltaTime * _speed * 2); // Збільште швидкість повороту для кращої реакції
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            transform.rotation = Quaternion.Slerp(transform.rotation, smoothRotation, Time.deltaTime * _speed * 2); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
-        // Якщо досягли цільової позиції, перевіряємо наступний стан
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             if (_goTo == GoTo.Bus)
@@ -129,35 +134,42 @@ public class Passenger : MonoBehaviour
                 Debug.Log($"ToSeat: {this}");
                 _isSitting = true;
 
-                // Поворот пасажира вперед після того, як він сів
-                Quaternion forwardRotation = Quaternion.Euler(0, seatPoint.transform.rotation.eulerAngles.y, 0);
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅ
+                Quaternion forwardRotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0);
                 transform.rotation = forwardRotation;
             }
         }
     }
 
-
     private IEnumerator WaitForPayment()
     {
         while (!_isFarePaid)
         {
-            // Чекаємо, поки гравець натисне кнопку 'P'
+            // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 'P'
             if (Input.GetKeyDown(KeyCode.P))
             {
                 _isFarePaid = true;
                 Debug.Log($"Pay: {this}");
 
-                // Тепер сідаємо на місце
-                yield return new WaitForSeconds(0.5f); // Затримка перед переходом на місце
-                MoveTo(seatPoint.transform.position);
+                // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+                yield return new WaitForSeconds(0.5f); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+                MoveTo(_seatPoint.transform.position);
             }
-            yield return null; // Чекаємо наступного кадру
+            yield return null; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         }
     }
 
     private void Stand()
     {
-        // Можливо, тут можна реалізувати анімацію стояння
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    }
+
+    public void SetDataLine(Transform doorPoint, Seat driverPoint, Seat seat, List<Transform> controlPointList)
+    {
+        _doorPoint = doorPoint;
+        _driverPoint = driverPoint;
+        _seatPoint = seat;
+        _controlPointList = controlPointList;
     }
 
     private enum GoTo
