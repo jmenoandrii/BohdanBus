@@ -11,32 +11,13 @@ public class BusStop : MonoBehaviour
     [SerializeField]
     private float _deltaSpeed = 0.2f;
     [SerializeField]
-    private List<Passenger> _passengerList;
+    private List<Passenger> _passengers;
     [SerializeField]
     private bool _isDataTransferred;
 
     private void Update()
     {
-        if (_bus != null && _passengerList.Count != 0)
-        {
-            byte i = 0;
-            while (_passengerList.Count != i)
-            {
-                _passengerList[i].canGoToBus = false;
-
-                if (_passengerList[i].IsInBus)
-                {
-                    _passengerList[i].transform.SetParent(_bus.PassengerPool.transform);
-                    _passengerList[i].canGoToBus = false;
-                    _passengerList.RemoveAt(i);
-                }
-                else
-                    i++;
-                if (i > _passengerList.Count)
-                    i = 0;
-            }
-        }
-
+        HandlePassengers();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +25,7 @@ public class BusStop : MonoBehaviour
         if (other.TryGetComponent(out BusLine bus))
         {
             _bus = bus;
+            _bus.SetCurrentBusStop(this);
 
             if (!_isDataTransferred)
             {
@@ -60,16 +42,52 @@ public class BusStop : MonoBehaviour
         }
     }
 
+    private void HandlePassengers()
+    {
+        if (_bus == null || _passengers.Count == 0) return;
+
+        for (int i = _passengers.Count - 1; i >= 0; i--)
+        {
+            Passenger passenger = _passengers[i];
+            if (passenger.GetState == Passenger.State.ReadyBoard || passenger.GetState == Passenger.State.BusAccessible)
+            {
+                if (IsReadyForBoarding(passenger))
+                    passenger.StartBoarding();
+                else
+                    passenger.StopBoarding();
+            }
+
+            if (passenger.GetState == Passenger.State.InBus)
+            {
+                _bus.AddPassenger(passenger);
+                passenger.transform.SetParent(_bus.PassengerPool.transform);
+                _passengers.RemoveAt(i);
+            }
+        }
+    }
+
+    private bool IsReadyForBoarding(Passenger passenger)
+    {
+        return _bus.BusSpeed <= _deltaSpeed &&
+               _bus.BusSpeed >= 0 &&
+               IsCorrectDoorOpen(passenger);
+    }
+
+    private bool IsCorrectDoorOpen(Passenger passenger)
+    {
+        return (passenger.DoorMark == Door.Mark.Front && _bus.IsOpenFrontDoor) ||
+               (passenger.DoorMark == Door.Mark.Back && _bus.IsOpenBackDoor);
+    }
+
     private void TransferDataToPassenger()
     {
-        foreach (Passenger passenger in _passengerList)
+        foreach (Passenger passenger in _passengers)
         {
-            if (passenger.hasData)
+            if (passenger.GetState >= Passenger.State.ReadyBoard)
                 return;
 
-            Transform doorPoint;
+            Transform doorPoint = null;
 
-            // Door
             switch (passenger.DoorMark)
             {
                 case Door.Mark.Front:
@@ -81,9 +99,6 @@ public class BusStop : MonoBehaviour
             }
             
             passenger.SetDataLine(doorPoint, _bus.DriverPoint, _bus.GetFreeSeat(), _bus.ControlPointList);
-
-            // Cheked
-            passenger.hasData = true;
         }
 
         _isDataTransferred = true;
