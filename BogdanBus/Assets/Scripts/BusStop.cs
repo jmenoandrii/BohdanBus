@@ -5,8 +5,19 @@ public class BusStop : MonoBehaviour
 {
     [Header("Bus Stop Data")]
     [SerializeField] private List<Passenger> _passengers;
+    [SerializeField] private Transform _disappearedPointPool;
     private BoardingSystem _busSystem;
-    private bool _isDataTransferred;
+
+    [Header("*** View zone ***")]
+    [SerializeField] private List<Transform> _disappearedPointList;
+    public List<Transform> DisappearedPointList => _disappearedPointList;
+
+
+    private void Awake()
+    {
+        foreach (Transform point in _disappearedPointPool)
+            _disappearedPointList.Add(point);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,10 +30,8 @@ public class BusStop : MonoBehaviour
 
             foreach (Passenger passenger in _passengers)
             {
-                _busSystem.AddPassengerToBus(passenger);
+                _busSystem.AddPassengerToBoardingList(passenger);
             }
-
-            _passengers.Clear();
         }
     }
 
@@ -37,6 +46,9 @@ public class BusStop : MonoBehaviour
 
     private void TransferDataToPassengers()
     {
+        /*
+            Perform it for the passenger if passenger has the 'OnBusStop' state
+         */
         foreach (Passenger passenger in _passengers)
         {
             if (passenger.GetState >= Passenger.State.ReadyBoard)
@@ -45,12 +57,18 @@ public class BusStop : MonoBehaviour
             Transform doorPoint = GetDoorPoint(passenger);
             passenger.SetDataLine(doorPoint, _busSystem.DriverPoint, _busSystem.GetFreeSeat(), _busSystem.ControlPointList);
         }
-
-        _isDataTransferred = true;
     }
 
     private Transform GetDoorPoint(Passenger passenger)
     {
         return passenger.DoorMark == Door.Mark.Front ? _busSystem.FrontDoorPoint : _busSystem.BackDoorPoint;
+    }
+
+    public void ForgetAboutPassenger()
+    {
+        /*
+            If the bus sends a command that all passengers boarded
+         */
+        _passengers.Clear();
     }
 }

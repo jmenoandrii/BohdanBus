@@ -7,35 +7,11 @@ using UnityEngine;
 public class Passenger : MonoBehaviour
 {
     [Header("Passenger Data")]
-    [SerializeField]
-    private Door.Mark _doorMark;
+    [SerializeField] private Door.Mark _doorMark;
     public Door.Mark DoorMark { get => _doorMark; }
 
-    [SerializeField]
-    private BusStop _busStopOfDestination;
+    [SerializeField] private BusStop _busStopOfDestination;
     public BusStop GetDestination { get => _busStopOfDestination; }
-
-    [Header("Bus Points")]
-    [SerializeField]
-    private Transform _doorPoint;
-    [SerializeField]
-    private Transform _exitPoint;
-    [SerializeField]
-    private Seat _driverPoint;
-    [SerializeField]
-    private Seat _seatPoint;
-    [SerializeField]
-    private List<Transform> _controlPointList;
-
-    private bool _isTransfered = false;
-
-    [SerializeField]
-    private State _state;
-    public State GetState { get => _state; }
-    public bool IsTransfered { get => _isTransfered; set => _isTransfered = value; }
-
-    [SerializeField]
-    private Destination _destination;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -45,6 +21,21 @@ public class Passenger : MonoBehaviour
     [SerializeField]
     private float _deltaForward = 1f;
     private Vector3 targetPosition;
+
+    [Header("*** View zone ***")]
+    // Bus points
+    [SerializeField]  private Transform _doorPoint;
+    [SerializeField] private Transform _exitPoint;
+    [SerializeField] private Seat _driverPoint;
+    [SerializeField] private Seat _seatPoint;
+    [SerializeField] private List<Transform> _controlPointList;
+    private bool _isTransfered = false;
+    public bool IsTransfered { get => _isTransfered; set => _isTransfered = value; }
+    // State
+    [SerializeField] private State _state;
+    public State GetState { get => _state; }
+    [SerializeField] private Destination _destination;
+
 
     private void Update()
     {
@@ -70,7 +61,6 @@ public class Passenger : MonoBehaviour
         {
             if (_destination != Destination.ToDriver)
             {
-                Debug.Log($"take: {this}");
                 _driverPoint.Take();
             }
             _destination = Destination.ToDriver;
@@ -116,20 +106,16 @@ public class Passenger : MonoBehaviour
             switch (_destination)
             {
                 case Destination.ToBus:
-                    Debug.Log($"ToBus: {this}");
                     _state = State.InBus;
                     break;
                 case Destination.ToDriver:
-                    Debug.Log($"ToDriver: {this}");
                     break;
                 case Destination.ToSeat:
-                    Debug.Log($"ToSeat: {this}");
                     _state = State.Sitting;
                     Quaternion forwardRotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0);
                     transform.rotation = forwardRotation;
                     break;
                 case Destination.ToExit:
-                    Debug.Log($"ToExit: {this}");
                     _state = State.LeftBus;
                     break;
             }

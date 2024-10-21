@@ -18,9 +18,13 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private GameObject _passengerPool;
     [SerializeField] private float _deltaSpeed = 0.2f;
 
-    private List<Passenger> _passengers = new List<Passenger>();
+    [Header("*** View zone ***")]
+    [SerializeField] private BusStop _currentBusStop;
+    [SerializeField] private List<Passenger> _passengers = new List<Passenger>();
+    [SerializeField] private List<Passenger> _boardingPassengerList = new List<Passenger>();
+    [SerializeField] private List<Passenger> _payingPassengerList = new List<Passenger>();
+    [SerializeField] private List<Passenger> _validatedPassengerList = new List<Passenger>();
     private List<Transform> _controlPointList = new List<Transform>();
-    private BusStop _currentBusStop;
     private Bus _bus;
 
     // Doors
@@ -154,6 +158,19 @@ public class BoardingSystem : MonoBehaviour
 
     public void ClearCurrentBusStop()
     {
+        /*
+            If bus drive away:
+            - we forget about this 'BusStop'
+            - we forget about passenger, who didn't board the bus
+         */
         _currentBusStop = null;
+        _boardingPassengerList.Clear();
+    }
+
+    //////
+
+    public void AddPassengerToBoardingList(Passenger passenger)
+    {
+        _boardingPassengerList.Add(passenger);
     }
 }
