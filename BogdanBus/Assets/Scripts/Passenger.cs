@@ -11,6 +11,10 @@ public class Passenger : MonoBehaviour
     private Door.Mark _doorMark;
     public Door.Mark DoorMark { get => _doorMark; }
 
+    [SerializeField]
+    private BusStop _busStopOfDestination;
+    public BusStop GetDestination { get => _busStopOfDestination; }
+
     [Header("Bus Points")]
     [SerializeField]
     private Transform _doorPoint;
@@ -22,17 +26,16 @@ public class Passenger : MonoBehaviour
     private Seat _seatPoint;
     [SerializeField]
     private List<Transform> _controlPointList;
-    
+
+    private bool _isTransfered = false;
+
     [SerializeField]
     private State _state;
     public State GetState { get => _state; }
+    public bool IsTransfered { get => _isTransfered; set => _isTransfered = value; }
 
     [SerializeField]
     private Destination _destination;
-
-    [SerializeField]
-    private BusStop _busStopOfDestination;
-    public BusStop GetDestination { get => _busStopOfDestination; }
 
     [Header("Movement Settings")]
     [SerializeField]

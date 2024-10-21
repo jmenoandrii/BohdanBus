@@ -358,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 25262805}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.97, y: -0.739, z: -1.51}
+  m_LocalPosition: {x: 2.2099998, y: -0.739, z: -1.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   _seatPointPool: {fileID: 501155902}
   _ticketPrinter: {fileID: 110045489}
   _passengerPool: {fileID: 1271310616}
-  _passengers: []
+  _deltaSpeed: 0.2
 --- !u!1 &339483579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,10 +3357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bus: {fileID: 0}
-  _deltaSpeed: 0.2
   _passengers: []
-  _isDataTransferred: 0
 --- !u!65 &806359743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6671,12 +6668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bus: {fileID: 0}
-  _deltaSpeed: 0.2
   _passengers:
   - {fileID: 998828248}
   - {fileID: 1496876558}
-  _isDataTransferred: 0
 --- !u!1 &1670446369
 GameObject:
   m_ObjectHideFlags: 0
@@ -6747,7 +6741,7 @@ Transform:
   m_GameObject: {fileID: 1680648096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.97, y: -0.739, z: 2.24}
+  m_LocalPosition: {x: 2.21, y: -0.739, z: 2.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7722,10 +7716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bus: {fileID: 0}
-  _deltaSpeed: 0.2
   _passengers: []
-  _isDataTransferred: 0
 --- !u!65 &1808129609
 BoxCollider:
   m_ObjectHideFlags: 0
