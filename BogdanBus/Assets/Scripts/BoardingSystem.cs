@@ -27,8 +27,6 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private List<Passenger> _payingPassengerList = new List<Passenger>();
     private List<Transform> _controlPointList = new List<Transform>();
     private Bus _bus;
-    private sbyte _iterator;
-    private Passenger _passenger;
 
     // Getters
     public bool IsOpenFrontDoor => _frontDoor.IsOpen;
@@ -67,30 +65,28 @@ public class BoardingSystem : MonoBehaviour
          */
         if (_boardingPassengerList.Count == 0) return;
 
-        _iterator = 0;
-        while (_iterator < _boardingPassengerList.Count)
+        Passenger passenger;
+        for (int i = 0; i < _boardingPassengerList.Count; i++)
         {
-            _passenger = _boardingPassengerList[_iterator];
+            passenger = _boardingPassengerList[i];
 
-            if (_passenger.GetState <= Passenger.State.BusAccessible)
+            if (passenger.GetState <= Passenger.State.BusAccessible)
             {
-                // Passenger is boarding
-                if (CanPassengerEnterOrExit(_passenger))
-                    _passenger.StartBoarding();
+                if (CanPassengerEnterOrExit(passenger))
+                    passenger.StartBoarding();
                 else
-                    _passenger.StopBoarding();
-                _iterator++;
+                    passenger.StopBoarding();
             }
             else
             {
                 // Passenger has boarded
-                _boardingPassengerList.Remove(_passenger);
-                _passenger.transform.SetParent(_passengerPool.transform);
-                _passengerList.Add(_passenger);
-                _payingPassengerList.Add(_passenger);
-                _currentBusStop.ForgetAboutPassenger(_passenger);
+                _boardingPassengerList.RemoveAt(i--);
+                passenger.transform.SetParent(_passengerPool.transform);
+                _passengerList.Add(passenger);
+                _payingPassengerList.Add(passenger);
+                _currentBusStop.ForgetAboutPassenger(passenger);
 
-                if (_passenger.IsHuman)
+                if (passenger.IsHuman)
                     _gameEnd.AddHuman();
                 else
                     _gameEnd.AddMonster();
@@ -116,46 +112,37 @@ public class BoardingSystem : MonoBehaviour
          */
         if (_passengerList.Count == 0) return;
 
-        _iterator = 0;
-        while (_iterator < _passengerList.Count)
+        for (int i = 0; i < _passengerList.Count; i++)
         {
-            _passenger = _passengerList[_iterator];
+            var passenger = _passengerList[i];
 
-            if (_currentBusStop != null && _passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(_passenger))
+            if (_currentBusStop != null && passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(passenger))
             {
-                // Go To Exit
-                if (_passenger.GetState == Passenger.State.LeftBus)
+                if (passenger.GetState == Passenger.State.LeftBus)
                 {
-                    // Forget about passager
-                    _passengerList.Remove(_passenger);
-                    _passenger.transform.SetParent(null);
+                    _passengerList.RemoveAt(i--);
+                    passenger.transform.SetParent(null);
                     continue;
                 }
 
-                _passenger.Left();
+                passenger.Left();
             }
-            else if (_payingPassengerList.Count != 0 && _passenger == _payingPassengerList[0])
+            else if (_payingPassengerList.Count != 0 && passenger == _payingPassengerList[0])
             {
-                // Go To Driver
-                if (_passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
+                if (passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
                 {
-                    // Fare Paid
-                    _payingPassengerList.Remove(_passenger);
-                    _passenger.PayedFare();
+                    _payingPassengerList.RemoveAt(0);
+                    passenger.PayedFare();
                     _ticketPrinter.Reset();
-                    _iterator++;
                     continue;
                 }
 
-                _passenger.GoToDriver();
+                passenger.GoToDriver();
             }
             else
             {
-                // Go To Seat
-                _passenger.GoToSeat();
+                passenger.GoToSeat();
             }
-
-            _iterator++;
         }
     }
 
