@@ -18,6 +18,7 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private TicketPrinter _ticketPrinter;
     [SerializeField] private GameObject _passengerPool;
     [SerializeField] private float _deltaSpeed = 0.2f;
+    [SerializeField] private GameEnd _gameEnd;
 
     [Header("*** View zone ***")]
     [SerializeField] private BusStop _currentBusStop;
@@ -73,6 +74,7 @@ public class BoardingSystem : MonoBehaviour
 
             if (_passenger.GetState <= Passenger.State.BusAccessible)
             {
+                // Passenger is boarding
                 if (CanPassengerEnterOrExit(_passenger))
                     _passenger.StartBoarding();
                 else
@@ -81,11 +83,17 @@ public class BoardingSystem : MonoBehaviour
             }
             else
             {
+                // Passenger has boarded
                 _boardingPassengerList.Remove(_passenger);
                 _passenger.transform.SetParent(_passengerPool.transform);
                 _passengerList.Add(_passenger);
                 _payingPassengerList.Add(_passenger);
                 _currentBusStop.ForgetAboutPassenger(_passenger);
+
+                if (_passenger.IsHuman)
+                    _gameEnd.AddHuman();
+                else
+                    _gameEnd.AddMonster();
             }
         }
     }

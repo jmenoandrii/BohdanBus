@@ -40,7 +40,7 @@ public class GameEnd : MonoBehaviour
             WayToHell();
     }
 
-    void CheckBusStop()
+    private void CheckBusStop()
     {
         // Getting bus stop if we don't have
         if (_busStop == null)
@@ -60,6 +60,9 @@ public class GameEnd : MonoBehaviour
         else if (_busStop.GetState == BusStop.State.IsDone)
             _busStop = null;
     }
+
+    public void AddHuman() { _peopleCount++; }
+    public void AddMonster() { _monstersCount++; }
 
     private void CheckEnd()
     {

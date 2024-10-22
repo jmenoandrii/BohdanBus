@@ -36,6 +36,8 @@ public class Passenger : MonoBehaviour
     public State GetState { get => _state; }
     [SerializeField] private Destination _destination = Destination.None;
 
+    public bool IsHuman => true;    // TODO: check if human or monster  (!!!!!!!!!)
+
     private void Awake()
     {
         _startPosition = this.transform.position;
