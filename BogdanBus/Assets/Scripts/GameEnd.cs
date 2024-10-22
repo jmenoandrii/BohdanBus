@@ -21,31 +21,38 @@ public class GameEnd : MonoBehaviour
 
     private void Update()
     {
-        if (_endType != EndType.None)
+        switch (_endType)
         {
-            CheckEnd();
-
-            switch (_endType)
-            {
-                case EndType.Fired:
-                    YouAreFired();
-                    break;
-                case EndType.Death:
-                    Death();
-                    break;
-                case EndType.People:
-                    WorkShiftEnd();
-                    break;
-                case EndType.Monster:
-                    WayToHell();
-                    break;
-            }
+            case EndType.Fired:
+                YouAreFired();
+                break;
+            case EndType.Death:
+                Death();
+                break;
+            case EndType.People:
+                WorkShiftEnd();
+                break;
+            case EndType.Monster:
+                WayToHell();
+                break;
         }
     }
 
-    public void AddMissedStop() { _missedStopCount++; }
-    public void AddHuman() { _peopleCount++; }
-    public void AddMonster() { _monstersCount++; }
+    public void AddMissedStop() 
+    { 
+        _missedStopCount++; 
+        CheckEnd();
+    }
+    public void AddHuman() 
+    { 
+        _peopleCount++; 
+        CheckEnd();
+    }
+    public void AddMonster() 
+    { 
+        _monstersCount++; 
+        CheckEnd();
+    }
 
     private void CheckEnd()
     {
