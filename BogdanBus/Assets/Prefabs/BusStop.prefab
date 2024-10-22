@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2121725c1d573f3458874c0a0ca7801b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEnterEvent:
+  _OnTriggerEnterEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7167654938663672519}

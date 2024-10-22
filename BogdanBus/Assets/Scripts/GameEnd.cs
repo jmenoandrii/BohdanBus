@@ -6,71 +6,51 @@ public class GameEnd : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] BoardingSystem _busSystem;
-    [SerializeField] BusStop _endBusStop;
     [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
+    public static GameEnd Singletone;
 
     [Header("*** View zone ***")]
     // Counters
     [SerializeField] private int _missedStopCount;
     [SerializeField] private int _peopleCount;
     [SerializeField] private int _monstersCount;
-    // Others
-    [SerializeField] private BusStop _busStop;
-    [SerializeField] private EndType _endType = EndType.NotDefined;
 
-    private void Update()
+    private void Awake()
     {
-        switch (_endType)
-        {
-            case EndType.Fired:
-                YouAreFired();
-                break;
-            case EndType.Death:
-                Death();
-                break;
-            case EndType.People:
-                WorkShiftEnd();
-                break;
-            case EndType.Monster:
-                WayToHell();
-                break;
-        }
+        Singletone = this;
     }
 
     public void AddMissedStop() 
     { 
-        _missedStopCount++; 
-        CheckEnd();
+        _missedStopCount++;
+        if (_missedStopCount >= 7)
+        {
+            YouAreFired();
+        }
     }
     public void AddHuman() 
     { 
         _peopleCount++; 
-        CheckEnd();
     }
     public void AddMonster() 
     { 
         _monstersCount++; 
-        CheckEnd();
     }
 
-    private void CheckEnd()
+    public void PerformeEndBusStop()
     {
-        if (_missedStopCount >= 7)
+        if (_peopleCount > 0 && _monstersCount > 0)
         {
-            _endType = EndType.Fired;
-        }
-        else if (_peopleCount > 0 && _monstersCount > 0)
-        {
-            _endType = EndType.Death;
+            Death();
         }
         else if (_monstersCount == 0)
         {
-            _endType = EndType.People;
+            WorkShiftEnd();
         }
         else if (_peopleCount == 0)
         {
-            _endType = EndType.Monster;
+            WayToHell();
         }
     }
 
@@ -82,50 +62,23 @@ public class GameEnd : MonoBehaviour
         bus.ForceStop();
 
         _endScreenAnimator.SetBool("youAreFired", true);
-
-        _endType = EndType.None;
     }
 
     private void WorkShiftEnd()
     {
-        if (!_endBusStopTrigger.isActivated)
-            return;
-
         Debug.Log("END -> WorkShiftEnd");
-
-        _endType = EndType.None;
     }
 
     private void WayToHell()
     {
-        if (!_endBusStopTrigger.isActivated)
-            return;
-
         Debug.Log("END -> WayToHell");
-
-        _endType = EndType.None;
     }
 
     private void Death()
     {
-        if (!_endBusStopTrigger.isActivated)
-            return;
-
         Debug.Log("END -> Death");
 
         Bus bus = _busSystem.GetComponent<Bus>();
         bus.ForceStop();
-
-        _endType = EndType.None;
-    }
-
-    public enum EndType
-    {
-        NotDefined,
-        Fired,
-        Death,
-        People,
-        Monster,
-        None
     }
 }

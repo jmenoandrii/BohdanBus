@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,20 +7,16 @@ public class BusStop : MonoBehaviour
     [Header("Bus Stop Data")]
     [SerializeField] private List<Passenger> _passengerList;
     private BoardingSystem _busSystem;
-    [SerializeField] private GameEnd _gameEnd;
 
     [Header("*** View zone ***")]
-    [SerializeField] private bool _hasPassenger;
-
-    private void Start()
-    {
-        _hasPassenger = _passengerList.Count > 0;
-    }
+    [SerializeField] private bool _isVisited = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out BoardingSystem busSystem))
         {
+            _isVisited = true;
+
             _busSystem = busSystem;
             _busSystem.SetCurrentBusStop(this);
 
@@ -43,10 +40,10 @@ public class BusStop : MonoBehaviour
 
     public void CheckMissed()
     {
-        if (_hasPassenger && _passengerList.Count > 0)
+        if (_isVisited && _passengerList.Count > 0)
         {
             ClearPassenger();
-            _gameEnd.AddMissedStop();
+            GameEnd.Singletone.AddMissedStop();
         }
     }
 
