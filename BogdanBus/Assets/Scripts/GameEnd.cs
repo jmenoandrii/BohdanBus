@@ -69,11 +69,6 @@ public class GameEnd : MonoBehaviour
 
     private void YouAreFired()
     {
-        _busStop = _busSystem.CurrentBusStop;
-        // when we have come to the next bus stop
-        if (_busStop == null)
-            return;
-
         Debug.Log("END -> YouAreFired");
 
         _busStop.ClearPassenger();
