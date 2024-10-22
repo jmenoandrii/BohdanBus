@@ -6,15 +6,15 @@ using UnityEngine.Events;
 public class Trigger : MonoBehaviour
 {
     [SerializeField]
-    private UnityEvent OnTriggerEnterEvent;
+    private UnityEvent _OnTriggerEnterEvent;
 
-    private bool isActivated;
+    public bool isActivated { get; private set; }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.GetComponent<Bus>() && !isActivated)
         {
-            OnTriggerEnterEvent.Invoke();
+            _OnTriggerEnterEvent.Invoke();
             isActivated = true;
         }
     }

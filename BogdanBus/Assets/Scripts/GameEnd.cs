@@ -7,7 +7,7 @@ public class GameEnd : MonoBehaviour
     [Header("Data")]
     [SerializeField] BoardingSystem _busSystem;
     [SerializeField] BusStop _endBusStop;
-    [SerializeField] DeathZone _deathZone;
+    [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
 
     [Header("*** View zone ***")]
@@ -81,9 +81,7 @@ public class GameEnd : MonoBehaviour
 
     private void WorkShiftEnd()
     {
-        _busStop = _busSystem.CurrentBusStop;
-        // when we have come to the end bus stop
-        if (_busStop != _endBusStop)
+        if (!_endBusStopTrigger.isActivated)
             return;
 
         Debug.Log("END -> WorkShiftEnd");
@@ -93,8 +91,7 @@ public class GameEnd : MonoBehaviour
 
     private void WayToHell()
     {
-        _busStop = _busSystem.CurrentBusStop;
-        if (_busStop != _endBusStop)
+        if (!_endBusStopTrigger.isActivated)
             return;
 
         Debug.Log("END -> WayToHell");
@@ -104,8 +101,7 @@ public class GameEnd : MonoBehaviour
 
     private void Death()
     {
-        // when we have come to the death zone
-        if (!_deathZone.IsBus)
+        if (!_endBusStopTrigger.isActivated)
             return;
 
         Debug.Log("END -> Death");
