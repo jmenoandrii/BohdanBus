@@ -12,6 +12,7 @@ public class Passenger : MonoBehaviour
 
     [SerializeField] private BusStop _busStopOfDestination;
     public BusStop GetDestination { get => _busStopOfDestination; }
+    [SerializeField] private bool _isHuman = true;
 
     [Header("Movement Settings")]
     [SerializeField] private float _speed = 2f;
@@ -36,7 +37,7 @@ public class Passenger : MonoBehaviour
     public State GetState { get => _state; }
     [SerializeField] private Destination _destination = Destination.None;
 
-    public bool IsHuman => true;    // TODO: check if human or monster  (!!!!!!!!!)
+    public bool IsHuman => _isHuman;
 
     private void Awake()
     {

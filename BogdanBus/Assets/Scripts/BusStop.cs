@@ -6,12 +6,10 @@ public class BusStop : MonoBehaviour
     [Header("Bus Stop Data")]
     [SerializeField] private List<Passenger> _passengerList;
     private BoardingSystem _busSystem;
+    [SerializeField] private GameEnd _gameEnd;
 
     [Header("*** View zone ***")]
     [SerializeField] private bool _hasPassenger;
-    [SerializeField] private State _state;
-
-    public State GetState => _state;
 
     private void Start()
     {
@@ -38,15 +36,17 @@ public class BusStop : MonoBehaviour
     {
         if (other.GetComponent<BoardingSystem>())
         {
-            if (_passengerList.Count > 0)
-            {
-                _state = State.IsMissed;
-                ClearPassenger();
-            }
-            else
-                _state = State.IsDone;
             _busSystem.ClearCurrentBusStop();
             _busSystem = null;
+        }
+    }
+
+    public void CheckMissed()
+    {
+        if (_hasPassenger && _passengerList.Count > 0)
+        {
+            ClearPassenger();
+            _gameEnd.AddMissedStop();
         }
     }
 

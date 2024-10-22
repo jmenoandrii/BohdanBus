@@ -12,22 +12,19 @@ public class GameEnd : MonoBehaviour
 
     [Header("*** View zone ***")]
     // Counters
-    [SerializeField] private List<BusStop> _missedStopList;
+    [SerializeField] private int _missedStopCount;
     [SerializeField] private int _peopleCount;
     [SerializeField] private int _monstersCount;
     // Others
     [SerializeField] private BusStop _busStop;
     [SerializeField] private EndType _endType = EndType.NotDefined;
 
-    public int MissedStopCount => _missedStopList.Count;
-
     private void Update()
     {
 
         if (_endType != EndType.None)
         {
-            CheckBusStop();
-
+            //CheckBusStop();
             CheckEnd();
         }
         if (_endType == EndType.Fired)
@@ -40,7 +37,7 @@ public class GameEnd : MonoBehaviour
             WayToHell();
     }
 
-    private void CheckBusStop()
+    /*private void CheckBusStop()
     {
         // Getting bus stop if we don't have
         if (_busStop == null)
@@ -59,14 +56,15 @@ public class GameEnd : MonoBehaviour
         }
         else if (_busStop.GetState == BusStop.State.IsDone)
             _busStop = null;
-    }
+    }*/
 
+    public void AddMissedStop() { _missedStopCount++; }
     public void AddHuman() { _peopleCount++; }
     public void AddMonster() { _monstersCount++; }
 
     private void CheckEnd()
     {
-        if (MissedStopCount >= 7)
+        if (_missedStopCount >= 7)
         {
             _endType = EndType.Fired;
         }

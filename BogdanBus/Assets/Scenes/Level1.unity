@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -854,6 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -987,6 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 457394141}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -2417,6 +2423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 1837526999}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -3121,6 +3128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -4651,6 +4659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 996914370}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -5134,6 +5143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -5409,6 +5419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 2
@@ -8292,6 +8306,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9448,6 +9466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -9618,6 +9637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
@@ -11265,6 +11288,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11747,6 +11774,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
@@ -12345,6 +12376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -12808,6 +12843,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -13367,6 +13406,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -13544,6 +13587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 2
@@ -14220,6 +14267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -14600,6 +14651,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15082,6 +15137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -16057,6 +16116,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16187,6 +16250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -16462,6 +16526,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
@@ -16955,6 +17023,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17132,6 +17204,10 @@ PrefabInstance:
     - target: {fileID: 4626977985142152254, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
@@ -17789,6 +17865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -19524,6 +19601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19759,6 +19840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -20607,6 +20689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 1
   _busStopOfDestination: {fileID: 622385380}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -20777,6 +20860,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -21734,6 +21821,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -22171,6 +22262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BusStop (0 - Zelena)
       objectReference: {fileID: 0}
+    - target: {fileID: 2889755381322308668, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4626977985142152254, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 166.45
@@ -22211,9 +22306,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2889755381322308668, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
@@ -22447,6 +22547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 457394141}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -23221,6 +23322,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23559,6 +23664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 996914370}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -24217,6 +24323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -24282,6 +24389,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24344,6 +24455,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
@@ -24943,6 +25058,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -25435,6 +25554,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -26446,6 +26569,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -26933,6 +27060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorMark: 0
   _busStopOfDestination: {fileID: 0}
+  _isHuman: 1
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 1
@@ -27189,14 +27317,7 @@ MonoBehaviour:
   _endBusStop: {fileID: 1317344691}
   _deathZone: {fileID: 696510653}
   _endScreenAnimator: {fileID: 104369141}
-  _missedStopList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _missedStopCount: 0
   _peopleCount: 0
   _monstersCount: 0
   _busStop: {fileID: 0}
@@ -27875,6 +27996,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _passengerList.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -27933,7 +28058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1517
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27941,11 +28066,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3566
+      value: -43.5
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.x
@@ -27953,7 +28078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.z
@@ -27965,7 +28090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -27975,6 +28100,10 @@ PrefabInstance:
       propertyPath: _sensetivity.x
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 5558638691441512334, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
+      propertyPath: _gameEnd
+      value: 
+      objectReference: {fileID: 2097140434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
