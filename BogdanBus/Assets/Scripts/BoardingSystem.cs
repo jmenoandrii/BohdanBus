@@ -114,8 +114,10 @@ public class BoardingSystem : MonoBehaviour
 
             if (_currentBusStop != null && _passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(_passenger))
             {
+                // Go To Exit
                 if (_passenger.GetState == Passenger.State.LeftBus)
                 {
+                    // Forget about passager
                     _passengerList.Remove(_passenger);
                     _passenger.transform.SetParent(null);
                     continue;
@@ -125,8 +127,10 @@ public class BoardingSystem : MonoBehaviour
             }
             else if (_payingPassengerList.Count != 0 && _passenger == _payingPassengerList[0])
             {
+                // Go To Driver
                 if (_passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
                 {
+                    // Fare Paid
                     _payingPassengerList.Remove(_passenger);
                     _passenger.PayedFare();
                     _ticketPrinter.Reset();
@@ -138,6 +142,7 @@ public class BoardingSystem : MonoBehaviour
             }
             else
             {
+                // Go To Seat
                 _passenger.GoToSeat();
             }
 

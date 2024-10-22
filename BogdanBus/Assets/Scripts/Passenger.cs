@@ -74,7 +74,7 @@ public class Passenger : MonoBehaviour
         {
             MoveTo(_state != State.LeftBus ? _doorPoint.position : _exitPoint.position);
         }
-        else if (_destination != Destination.ToVanishing)
+        else if (_destination == Destination.ToVanishing)
         {
             MoveTo(_vanishingPoint.position);
         }
@@ -187,7 +187,7 @@ public class Passenger : MonoBehaviour
     public void SetExitPointLine(Transform exitPoint, Transform vanishingPoint)
     {
         _exitPoint = exitPoint;
-        _exitPoint = vanishingPoint;
+        _vanishingPoint = vanishingPoint;
     }
 
     private enum Destination

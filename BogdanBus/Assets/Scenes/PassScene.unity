@@ -1720,7 +1720,7 @@ MonoBehaviour:
   _backDoorPoint: {fileID: 2060223765}
   _frontDoorExitPoint: {fileID: 1680648097}
   _backDoorExitPoint: {fileID: 25262806}
-  _vanishingPoint: {fileID: 0}
+  _vanishingPoint: {fileID: 701812840}
   _driverPoint: {fileID: 1002012184}
   _controlPointPool: {fileID: 447964698}
   _seatPointPool: {fileID: 501155902}
@@ -4360,7 +4360,7 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
-  _disappearePosition: {x: 0, y: 0, z: 0}
+  _vanishingPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -4838,7 +4838,7 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
-  _disappearePosition: {x: 0, y: 0, z: 0}
+  _vanishingPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -6390,7 +6390,7 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
-  _disappearePosition: {x: 0, y: 0, z: 0}
+  _vanishingPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -8558,7 +8558,7 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
-  _disappearePosition: {x: 0, y: 0, z: 0}
+  _vanishingPoint: {fileID: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
