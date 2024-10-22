@@ -69,11 +69,7 @@ public class GameEnd : MonoBehaviour
 
     private void YouAreFired()
     {
-        _busStop = _busSystem.CurrentBusStop;
-
         Debug.Log("END -> YouAreFired");
-
-        _busStop.ClearPassenger();
 
         Bus bus = _busSystem.GetComponent<Bus>();
         bus.ForceStop();
