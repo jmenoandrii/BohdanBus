@@ -11,6 +11,7 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private Transform _backDoorPoint;
     [SerializeField] private Transform _frontDoorExitPoint;
     [SerializeField] private Transform _backDoorExitPoint;
+    [SerializeField] private Transform _vanishingPoint;
     [SerializeField] private Seat _driverPoint;
     [SerializeField] private Transform _controlPointPool;
     [SerializeField] private Transform _seatPointPool;
@@ -35,7 +36,7 @@ public class BoardingSystem : MonoBehaviour
     public Transform BackDoorPoint => _backDoorPoint;
     public Transform FrontDoorExitPoint => _frontDoorExitPoint;
     public Transform BackDoorExitPoint => _backDoorExitPoint;
-    public Vector3 DisappearPosition => (_frontDoorExitPoint.position + _backDoorExitPoint.position) / 2;
+    public Transform VanishingPoint => _vanishingPoint;
     public Seat DriverPoint => _driverPoint;
     public List<Transform> ControlPointList => _controlPointList;
     public float BusSpeed => _bus.CurrentSpeed;
@@ -189,10 +190,10 @@ public class BoardingSystem : MonoBehaviour
         switch (passenger.DoorMark)
         {
             case Door.Mark.Front:
-                passenger.SetExitPoint(_frontDoorExitPoint);
+                passenger.SetExitPointLine(_frontDoorExitPoint, _vanishingPoint);
                 break;
             case Door.Mark.Back:
-                passenger.SetExitPoint(_backDoorExitPoint);
+                passenger.SetExitPointLine(_backDoorExitPoint, _vanishingPoint);
                 break;
         }
     }

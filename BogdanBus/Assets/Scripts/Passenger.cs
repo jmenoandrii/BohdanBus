@@ -25,7 +25,7 @@ public class Passenger : MonoBehaviour
     [SerializeField] private Vector3 _startPosition;
     [SerializeField] private Transform _doorPoint;
     [SerializeField] private Transform _exitPoint;
-    [SerializeField] private Vector3 _disappearePosition;
+    [SerializeField] private Transform _vanishingPoint;
     [SerializeField] private Seat _driverPoint;
     [SerializeField] private Seat _seatPoint;
     [SerializeField] private List<Transform> _controlPointList;
@@ -74,9 +74,9 @@ public class Passenger : MonoBehaviour
         {
             MoveTo(_state != State.LeftBus ? _doorPoint.position : _exitPoint.position);
         }
-        else if (_destination != Destination.ToDisappear)
+        else if (_destination != Destination.ToVanishing)
         {
-            MoveTo(_disappearePosition);
+            MoveTo(_vanishingPoint.position);
         }
     }
 
@@ -116,15 +116,15 @@ public class Passenger : MonoBehaviour
                     break;
                 case Destination.ToSeat:
                     _state = State.Sitting;
-                    transform.rotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0); //forwardRotation
+                    transform.rotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0); // forwardRotation
                     break;
                 case Destination.ToExit:
                     if (_state != State.LeftBus)
                         _state = State.LeftBus;
                     else
-                        _destination = Destination.ToDisappear;
+                        _destination = Destination.ToVanishing;
                     break;
-                case Destination.ToDisappear:
+                case Destination.ToVanishing:
                     this.gameObject.SetActive(false);
                     break;
             }
@@ -184,9 +184,10 @@ public class Passenger : MonoBehaviour
         _state = State.ReadyBoard;
     }
 
-    public void SetExitPoint(Transform exitPoint)
+    public void SetExitPointLine(Transform exitPoint, Transform vanishingPoint)
     {
         _exitPoint = exitPoint;
+        _exitPoint = vanishingPoint;
     }
 
     private enum Destination
@@ -197,7 +198,7 @@ public class Passenger : MonoBehaviour
         ToDriver,
         ToSeat,
         ToExit,
-        ToDisappear
+        ToVanishing
     }
 
     public enum State

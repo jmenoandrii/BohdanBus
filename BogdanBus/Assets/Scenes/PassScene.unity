@@ -1720,6 +1720,7 @@ MonoBehaviour:
   _backDoorPoint: {fileID: 2060223765}
   _frontDoorExitPoint: {fileID: 1680648097}
   _backDoorExitPoint: {fileID: 25262806}
+  _vanishingPoint: {fileID: 0}
   _driverPoint: {fileID: 1002012184}
   _controlPointPool: {fileID: 447964698}
   _seatPointPool: {fileID: 501155902}
@@ -2977,6 +2978,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isOpen: 0
   _doorMesh: {fileID: 353665089}
+--- !u!1 &701812839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701812840}
+  m_Layer: 0
+  m_Name: VanishingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701812840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701812839}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.4599996, y: -0.73899996, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1753629872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -7404,6 +7436,7 @@ Transform:
   - {fileID: 501155902}
   - {fileID: 1180944958}
   - {fileID: 447964698}
+  - {fileID: 701812840}
   - {fileID: 1002012183}
   m_Father: {fileID: 303536821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

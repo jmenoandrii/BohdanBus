@@ -44,7 +44,7 @@ public class BusStop : MonoBehaviour
 
             Transform doorPoint = GetDoorPoint(passenger);
             passenger.SetDataLine(doorPoint, _busSystem.DriverPoint, _busSystem.GetFreeSeat(), _busSystem.ControlPointList);
-            passenger.SetExitPoint(passenger.DoorMark == Door.Mark.Front ? _busSystem.FrontDoorExitPoint : _busSystem.BackDoorExitPoint);
+            passenger.SetExitPointLine(passenger.DoorMark == Door.Mark.Front ? _busSystem.FrontDoorExitPoint : _busSystem.BackDoorExitPoint, _busSystem.VanishingPoint);
         }
     }
 
