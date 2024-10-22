@@ -24,7 +24,6 @@ public class GameEnd : MonoBehaviour
 
         if (_endType != EndType.None)
         {
-            //CheckBusStop();
             CheckEnd();
         }
         if (_endType == EndType.Fired)
@@ -36,27 +35,6 @@ public class GameEnd : MonoBehaviour
         else if (_endType == EndType.Monster)
             WayToHell();
     }
-
-    /*private void CheckBusStop()
-    {
-        // Getting bus stop if we don't have
-        if (_busStop == null)
-            _busStop = _busSystem.CurrentBusStop;
-
-        // if after getting we don't have '_busStop', do nothing
-        if (_busStop == null)
-            return;
-
-        // if we don't have such _busStop check its state
-        if (!_missedStopList.Contains(_busStop) &&
-            _busStop.GetState == BusStop.State.IsMissed)
-        {
-            _missedStopList.Add(_busStop);
-            _busStop = null;
-        }
-        else if (_busStop.GetState == BusStop.State.IsDone)
-            _busStop = null;
-    }*/
 
     public void AddMissedStop() { _missedStopCount++; }
     public void AddHuman() { _peopleCount++; }

@@ -18,7 +18,7 @@ public class Bus : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField]
-    private bool _canMove;
+    private bool _isAbleToMove;
     [SerializeField]
     private float _acceleration = 500f;
     [SerializeField]
@@ -61,12 +61,12 @@ public class Bus : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _canMove = true;
+        _isAbleToMove = true;
     }
 
     private void FixedUpdate()
     {
-        if (_canMove)
+        if (_isAbleToMove)
         {
             _controlAxis = Input.GetAxis("Vertical");
             _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
@@ -168,7 +168,7 @@ public class Bus : MonoBehaviour
         _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
-    public void ForceStop() { _canMove = false; }
+    public void ForceStop() { _isAbleToMove = false; }
 
 
     private void ForcedBraking()
