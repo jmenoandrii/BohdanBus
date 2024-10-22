@@ -30,7 +30,7 @@ public class GameEnd : MonoBehaviour
 
             CheckEnd();
         }
-        else if (_endType == EndType.Fired)
+        if (_endType == EndType.Fired)
             YouAreFired();
         else if (_endType == EndType.Death)
             Death();
