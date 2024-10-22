@@ -138,12 +138,6 @@ public class Passenger : MonoBehaviour
         _destination = Destination.ToBack;
     }
 
-    public void StandUp()
-    {
-        _state = State.StandUp;
-        _seatPoint.GiveUp();
-    }
-
     public void StartBoarding()
     {
         _destination = Destination.ToBus;
@@ -175,6 +169,8 @@ public class Passenger : MonoBehaviour
 
     public void Left()
     {
+        _state = State.StandUp;
+        _seatPoint.GiveUp();
         _destination = Destination.ToExit;
     }
 

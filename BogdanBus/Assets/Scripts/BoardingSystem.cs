@@ -122,8 +122,7 @@ public class BoardingSystem : MonoBehaviour
 
                 _passenger.Left();
             }
-
-            if (_payingPassengerList.Count != 0 && _passenger == _payingPassengerList[0])
+            else if (_payingPassengerList.Count != 0 && _passenger == _payingPassengerList[0])
             {
                 if (_passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
                 {
