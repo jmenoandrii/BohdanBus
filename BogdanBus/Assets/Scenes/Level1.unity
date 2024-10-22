@@ -11221,6 +11221,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2097140434}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PerformeEndBusStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameEnd, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: _gameEnd
       value: 
@@ -16970,17 +16998,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4626977985142152254, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
   m_PrefabInstance: {fileID: 1298900665}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1317344691 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7167654938663672519, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
-  m_PrefabInstance: {fileID: 914360660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1323679095
 GameObject:
   m_ObjectHideFlags: 0
@@ -17140,6 +17157,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
       propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+      propertyPath: _OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -20397,6 +20418,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562954306}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1564052146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5112831054429671201, guid: 85fcad3bee495df4e9682b2ebfc73df1, type: 3}
+  m_PrefabInstance: {fileID: 914360660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2121725c1d573f3458874c0a0ca7801b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1567828097
 GameObject:
   m_ObjectHideFlags: 0
@@ -27247,14 +27279,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _busSystem: {fileID: 1556215717}
-  _endBusStop: {fileID: 1317344691}
-  _endBusStopTrigger: {fileID: 0}
+  _endBusStopTrigger: {fileID: 1564052146}
   _endScreenAnimator: {fileID: 104369141}
-  _missedStopCount: 6
+  _missedStopCount: 0
   _peopleCount: 0
   _monstersCount: 0
-  _busStop: {fileID: 0}
-  _endType: 0
 --- !u!4 &2097140435
 Transform:
   m_ObjectHideFlags: 0
@@ -27991,7 +28020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27999,7 +28028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27
+      value: -94
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.w
