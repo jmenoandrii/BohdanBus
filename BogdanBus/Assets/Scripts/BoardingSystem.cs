@@ -40,6 +40,7 @@ public class BoardingSystem : MonoBehaviour
     public Seat DriverPoint => _driverPoint;
     public List<Transform> ControlPointList => _controlPointList;
     public float BusSpeed => _bus.CurrentSpeed;
+    public BusStop CurrentBusStop => _currentBusStop;
 
     private void Awake()
     {

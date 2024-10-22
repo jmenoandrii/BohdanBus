@@ -18,6 +18,8 @@ public class Bus : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField]
+    private bool _canMove;
+    [SerializeField]
     private float _acceleration = 500f;
     [SerializeField]
     private float _breakeForce = 300f;
@@ -52,22 +54,31 @@ public class Bus : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public Gear GearState { get => _gear; }
+    
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _canMove = true;
     }
 
     private void FixedUpdate()
     {
-        _controlAxis = Input.GetAxis("Vertical");
-        _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
+        if (_canMove)
+        {
+            _controlAxis = Input.GetAxis("Vertical");
+            _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
 
-        PedalChecking();
+            PedalChecking();
 
-        Acceleration();
-        Breaking();
-        Turning();
+            Acceleration();
+            Braking();
+            Turning();
+        }
+        else
+        {
+            ForcedBraking();
+        }
     }
 
     private void PedalChecking()
@@ -112,7 +123,7 @@ public class Bus : MonoBehaviour
         _frontRightWheel.motorTorque = Mathf.Lerp(_frontRightWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
     }
 
-    private void Breaking()
+    private void Braking()
     {
         if (_gear == Gear.Park)
         {
@@ -155,6 +166,24 @@ public class Bus : MonoBehaviour
         _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
+    public void ForceStop() { _canMove = false; }
+
+
+    private void ForcedBraking()
+    {
+        // Forcefully set the maximum braking force
+        _curBreakingForce = _breakeForce * 10f; // Increase braking force for an instant stop
+
+        // Apply the braking force to all wheels
+        _frontLeftWheel.brakeTorque = _curBreakingForce;
+        _frontRightWheel.brakeTorque = _curBreakingForce;
+        _backLeftWheel.brakeTorque = _curBreakingForce;
+        _backRightWheel.brakeTorque = _curBreakingForce;
+
+        // Reset the bus velocity if using Rigidbody
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    }
 
     private void Turning()
     {

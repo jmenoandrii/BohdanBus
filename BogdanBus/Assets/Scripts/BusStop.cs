@@ -7,6 +7,17 @@ public class BusStop : MonoBehaviour
     [SerializeField] private List<Passenger> _passengerList;
     private BoardingSystem _busSystem;
 
+    [Header("*** View zone ***")]
+    [SerializeField] private bool _hasPassenger;
+    [SerializeField] private State _state;
+
+    public State GetState => _state;
+
+    private void Start()
+    {
+        _hasPassenger = _passengerList.Count > 0;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out BoardingSystem busSystem))
@@ -27,6 +38,13 @@ public class BusStop : MonoBehaviour
     {
         if (other.GetComponent<BoardingSystem>())
         {
+            if (_passengerList.Count > 0)
+            {
+                _state = State.IsMissed;
+                ClearPassenger();
+            }
+            else
+                _state = State.IsDone;
             _busSystem.ClearCurrentBusStop();
             _busSystem = null;
         }
@@ -56,8 +74,27 @@ public class BusStop : MonoBehaviour
     public void ForgetAboutPassenger(Passenger passenger)
     {
         /*
-            If the bus sends a command that all passengers boarded
+            If the bus sends a command that the passengers boarded
          */
         _passengerList.Remove(passenger);
+    }
+
+    public void ClearPassenger()
+    {
+        /* 
+            bus stop is missed
+         */
+        foreach (Passenger passenger in _passengerList)
+        {
+            passenger.gameObject.SetActive(false);
+        }
+        _passengerList.Clear();
+    }
+
+    public enum State
+    {
+        None,
+        IsMissed,
+        IsDone
     }
 }
