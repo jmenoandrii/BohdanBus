@@ -21,19 +21,26 @@ public class GameEnd : MonoBehaviour
 
     private void Update()
     {
-
         if (_endType != EndType.None)
         {
             CheckEnd();
+
+            switch (_endType)
+            {
+                case EndType.Fired:
+                    YouAreFired();
+                    break;
+                case EndType.Death:
+                    Death();
+                    break;
+                case EndType.People:
+                    WorkShiftEnd();
+                    break;
+                case EndType.Monster:
+                    WayToHell();
+                    break;
+            }
         }
-        if (_endType == EndType.Fired)
-            YouAreFired();
-        else if (_endType == EndType.Death)
-            Death();
-        else if (_endType == EndType.People)
-            WorkShiftEnd();
-        else if (_endType == EndType.Monster)
-            WayToHell();
     }
 
     public void AddMissedStop() { _missedStopCount++; }
@@ -62,6 +69,7 @@ public class GameEnd : MonoBehaviour
 
     private void YouAreFired()
     {
+        _busStop = _busSystem.CurrentBusStop;
         // when we have come to the next bus stop
         if (_busStop == null)
             return;
@@ -80,6 +88,7 @@ public class GameEnd : MonoBehaviour
 
     private void WorkShiftEnd()
     {
+        _busStop = _busSystem.CurrentBusStop;
         // when we have come to the end bus stop
         if (_busStop != _endBusStop)
             return;
