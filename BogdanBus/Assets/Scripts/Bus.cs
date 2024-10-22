@@ -28,6 +28,8 @@ public class Bus : MonoBehaviour
 
     [SerializeField]
     private float _brakeSmoothing = 3f;
+    [SerializeField]
+    private float forceBrakeMultiplier = 6f;
 
     [SerializeField]
     private float _maxSpeed = 120f;
@@ -171,18 +173,26 @@ public class Bus : MonoBehaviour
 
     private void ForcedBraking()
     {
-        // Forcefully set the maximum braking force
-        _curBreakingForce = _breakeForce * 10f; // Increase braking force for an instant stop
+        // Set a very high braking force for immediate stop
+        float adjustedBrakeForce = _breakeForce * forceBrakeMultiplier;
 
-        // Apply the braking force to all wheels
-        _frontLeftWheel.brakeTorque = _curBreakingForce;
-        _frontRightWheel.brakeTorque = _curBreakingForce;
-        _backLeftWheel.brakeTorque = _curBreakingForce;
-        _backRightWheel.brakeTorque = _curBreakingForce;
+        // Set the current braking force to the adjusted braking force
+        _curBreakingForce = adjustedBrakeForce;
 
-        // Reset the bus velocity if using Rigidbody
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        // Adjust front and rear brake force proportions if necessary
+        float frontBrakeForce = _curBreakingForce * 0.8f; // More force to front wheels
+        float rearBrakeForce = _curBreakingForce * 0.2f; // Less force to rear wheels
+
+        // Apply the brake torque to the wheels
+        _frontLeftWheel.brakeTorque = frontBrakeForce;
+        _frontRightWheel.brakeTorque = frontBrakeForce;
+        _backLeftWheel.brakeTorque = rearBrakeForce;
+        _backRightWheel.brakeTorque = rearBrakeForce;
+
+        // Optionally, reset the bus velocity if using Rigidbody
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 5f); // Smoothly reduce velocity
+        rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * 5f); // Smoothly reduce angular velocity
     }
 
     private void Turning()

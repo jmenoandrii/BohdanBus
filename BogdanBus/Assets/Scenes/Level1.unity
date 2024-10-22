@@ -27189,11 +27189,18 @@ MonoBehaviour:
   _endBusStop: {fileID: 1317344691}
   _deathZone: {fileID: 696510653}
   _endScreenAnimator: {fileID: 104369141}
-  _missedStopList: []
-  _peopleCount: 5
-  _monstersCount: 5
+  _missedStopList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _peopleCount: 0
+  _monstersCount: 0
   _busStop: {fileID: 0}
-  _endType: 1
+  _endType: 0
 --- !u!4 &2097140435
 Transform:
   m_ObjectHideFlags: 0
@@ -27916,13 +27923,17 @@ PrefabInstance:
       propertyPath: _acceleration
       value: 600
       objectReference: {fileID: 0}
+    - target: {fileID: 3100668845501178319, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
+      propertyPath: forceBrakeMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3185128886616447149, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_Name
       value: Bus
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1552.7
+      value: 1517
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27930,7 +27941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3371.9
+      value: 3566
       objectReference: {fileID: 0}
     - target: {fileID: 3389811666678154465, guid: 8e2f4158331bd40ce9ff57c3cc5dc0ed, type: 3}
       propertyPath: m_LocalRotation.w
