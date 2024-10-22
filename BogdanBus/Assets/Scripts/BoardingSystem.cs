@@ -25,17 +25,20 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private List<Passenger> _payingPassengerList = new List<Passenger>();
     private List<Transform> _controlPointList = new List<Transform>();
     private Bus _bus;
+    private sbyte _iterator;
+    private Passenger _passenger;
 
     // Getters
     public bool IsOpenFrontDoor => _frontDoor.IsOpen;
     public bool IsOpenBackDoor => _backDoor.IsOpen;
     public Transform FrontDoorPoint => _frontDoorPoint;
     public Transform BackDoorPoint => _backDoorPoint;
+    public Transform FrontDoorExitPoint => _frontDoorExitPoint;
+    public Transform BackDoorExitPoint => _backDoorExitPoint;
+    public Vector3 DisappearPosition => (_frontDoorExitPoint.position + _backDoorExitPoint.position) / 2;
     public Seat DriverPoint => _driverPoint;
     public List<Transform> ControlPointList => _controlPointList;
     public float BusSpeed => _bus.CurrentSpeed;
-    // TODO: Maybe isn't needed
-    public GameObject PassengerPool => _passengerPool;
 
     private void Awake()
     {
@@ -61,21 +64,26 @@ public class BoardingSystem : MonoBehaviour
          */
         if (_boardingPassengerList.Count == 0) return;
 
-        foreach (Passenger passenger in _boardingPassengerList)
+        _iterator = 0;
+        while (_iterator < _boardingPassengerList.Count)
         {
-            if (passenger.GetState <= Passenger.State.BusAccessible)
+            _passenger = _boardingPassengerList[_iterator];
+
+            if (_passenger.GetState <= Passenger.State.BusAccessible)
             {
-                if (CanPassengerEnterOrExit(passenger))
-                    passenger.StartBoarding();
+                if (CanPassengerEnterOrExit(_passenger))
+                    _passenger.StartBoarding();
                 else
-                    passenger.StopBoarding();
+                    _passenger.StopBoarding();
+                _iterator++;
             }
             else
             {
-                passenger.transform.SetParent(_passengerPool.transform);
-                _passengerList.Add(passenger);
-                _payingPassengerList.Add(passenger);
-                _currentBusStop.ForgetAboutPassenger(passenger);
+                _boardingPassengerList.Remove(_passenger);
+                _passenger.transform.SetParent(_passengerPool.transform);
+                _passengerList.Add(_passenger);
+                _payingPassengerList.Add(_passenger);
+                _currentBusStop.ForgetAboutPassenger(_passenger);
             }
         }
     }
@@ -98,36 +106,42 @@ public class BoardingSystem : MonoBehaviour
          */
         if (_passengerList.Count == 0) return;
 
-        foreach (Passenger passenger in _passengerList)
+        _iterator = 0;
+        while (_iterator < _passengerList.Count)
         {
-            if (_currentBusStop != null && passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(passenger))
+            _passenger = _passengerList[_iterator];
+
+            if (_currentBusStop != null && _passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(_passenger))
             {
-                if (passenger.GetState == Passenger.State.LeftBus)
+                if (_passenger.GetState == Passenger.State.LeftBus)
                 {
-                    _passengerList.Remove(passenger);
-                    passenger.transform.SetParent(null);
+                    _passengerList.Remove(_passenger);
+                    _passenger.transform.SetParent(null);
                     continue;
                 }
 
-                passenger.Left();
+                _passenger.Left();
             }
 
-            if (_payingPassengerList.Count != 0 && passenger == _payingPassengerList[0])
+            if (_payingPassengerList.Count != 0 && _passenger == _payingPassengerList[0])
             {
-                if (passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
+                if (_passenger.GetState == Passenger.State.Paying && _ticketPrinter.GetState == TicketPrinter.State.Returned)
                 {
-                    _payingPassengerList.Remove(passenger);
-                    passenger.PayedFare();
+                    _payingPassengerList.Remove(_passenger);
+                    _passenger.PayedFare();
                     _ticketPrinter.Reset();
+                    _iterator++;
                     continue;
                 }
 
-                passenger.GoToDriver();
+                _passenger.GoToDriver();
             }
             else
             {
-                passenger.GoToSeat();
+                _passenger.GoToSeat();
             }
+
+            _iterator++;
         }
     }
 
@@ -140,8 +154,7 @@ public class BoardingSystem : MonoBehaviour
 
     private bool IsCorrectDoorOpen(Passenger passenger)
     {
-        return (passenger.DoorMark == Door.Mark.Front && IsOpenFrontDoor) ||
-               (passenger.DoorMark == Door.Mark.Back && IsOpenBackDoor);
+        return passenger.DoorMark == Door.Mark.Front ? IsOpenFrontDoor : IsOpenBackDoor;
     }
 
     private void InitializeControlPoints()

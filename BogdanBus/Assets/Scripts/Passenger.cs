@@ -14,18 +14,18 @@ public class Passenger : MonoBehaviour
     public BusStop GetDestination { get => _busStopOfDestination; }
 
     [Header("Movement Settings")]
-    [SerializeField]
-    private float _speed = 2f;
-    [SerializeField]
-    private float _deltaBottom = 0.5f;
-    [SerializeField]
-    private float _deltaForward = 1f;
+    [SerializeField] private float _speed = 2f;
+    [SerializeField] private float _deltaBottom = 0.5f;
+    [SerializeField] private float _deltaForward = 1f;
+    [SerializeField] private float _disappearDistance = 2f;
     private Vector3 targetPosition;
 
     [Header("*** View zone ***")]
     // Bus points
-    [SerializeField]  private Transform _doorPoint;
+    [SerializeField] private Vector3 _startPosition;
+    [SerializeField] private Transform _doorPoint;
     [SerializeField] private Transform _exitPoint;
+    [SerializeField] private Vector3 _disappearePosition;
     [SerializeField] private Seat _driverPoint;
     [SerializeField] private Seat _seatPoint;
     [SerializeField] private List<Transform> _controlPointList;
@@ -34,50 +34,49 @@ public class Passenger : MonoBehaviour
     // State
     [SerializeField] private State _state;
     public State GetState { get => _state; }
-    [SerializeField] private Destination _destination;
+    [SerializeField] private Destination _destination = Destination.None;
 
+    private void Awake()
+    {
+        _startPosition = this.transform.position;
+    }
 
     private void Update()
     {
         Moving();
     }
-
+    
     private void Moving()
     {
-        if (_state == State.OnBusStop || _state == State.LeftBus)
+        if (_destination == Destination.None)
             return;
 
-        _destination = Destination.None;
-
-        if (_state == State.BusAccessible)
+        if (_destination == Destination.ToBack)         // GoBack
         {
-            _destination = Destination.ToBus;
-            if (Vector3.Distance(transform.position, targetPosition) > _deltaForward)
+            MoveTo(_startPosition);
+        }
+        else if (_state == State.BusAccessible)         // GoToBus
+        {
+            if (Vector3.Distance(transform.position, _doorPoint.position) > _deltaForward)
                 MoveTo(_doorPoint.position - Vector3.up * _deltaBottom);
             else
                 MoveTo(_doorPoint.position);
         }
-        else if (_state == State.InBus)
+        else if (_destination == Destination.ToDriver)  // GoToDriver
         {
-            if (_destination != Destination.ToDriver)
-            {
-                _driverPoint.Take();
-            }
-            _destination = Destination.ToDriver;
             MoveTo(_driverPoint.transform.position);
         }
-        else if (_state == State.FarePaid)
+        else if (_destination == Destination.ToSeat)    // GoToSeat
         {
-            _destination = Destination.ToSeat;
             MoveTo(_seatPoint.transform.position);
         }
-        else if (_state == State.StandUp)
+        else if (_destination == Destination.ToExit)    // GoToExitDoor
         {
-            _destination = Destination.ToExit;
-            if (Vector3.Distance(transform.position, targetPosition) > _deltaForward)
-                MoveTo(_exitPoint.position - Vector3.up * _deltaBottom);
-            else
-                MoveTo(_exitPoint.position);
+            MoveTo(_state != State.LeftBus ? _doorPoint.position : _exitPoint.position);
+        }
+        else if (_destination != Destination.ToDisappear)
+        {
+            MoveTo(_disappearePosition);
         }
     }
 
@@ -105,45 +104,38 @@ public class Passenger : MonoBehaviour
         {
             switch (_destination)
             {
+                case Destination.ToBack:
+                    _destination = Destination.None;
+                    break;
                 case Destination.ToBus:
                     _state = State.InBus;
                     break;
                 case Destination.ToDriver:
+                    _driverPoint.Take();
                     _state = State.Paying;
                     break;
                 case Destination.ToSeat:
                     _state = State.Sitting;
-                    Quaternion forwardRotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0);
-                    transform.rotation = forwardRotation;
+                    transform.rotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0); //forwardRotation
                     break;
                 case Destination.ToExit:
-                    _state = State.LeftBus;
+                    if (_state != State.LeftBus)
+                        _state = State.LeftBus;
+                    else
+                        _destination = Destination.ToDisappear;
+                    break;
+                case Destination.ToDisappear:
+                    this.gameObject.SetActive(false);
                     break;
             }
         }
     }
 
-    private IEnumerator WaitForPayment()
-    {
-        //while (!_isFarePaid)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.P))
-        //    {
-        //        _isFarePaid = true;
-        //        Debug.Log($"Pay: {this}");
-
-        //        yield return new WaitForSeconds(0.5f);                                
-        //        MoveTo(_seatPoint.transform.position);
-        //    }
-        //    yield return null;                       
-        //}
-
-        yield return null; 
-    }
-
     public void GoBack()
     {
-
+        _seatPoint.GiveUp();
+        _state = State.OnBusStop;
+        _destination = Destination.ToBack;
     }
 
     public void StandUp()
@@ -154,11 +146,13 @@ public class Passenger : MonoBehaviour
 
     public void StartBoarding()
     {
+        _destination = Destination.ToBus;
         _state = State.BusAccessible;
     }
 
     public void StopBoarding()
     {
+        _destination = Destination.None;
         _state = State.ReadyBoard;
     }
 
@@ -169,7 +163,9 @@ public class Passenger : MonoBehaviour
 
     public void PayedFare()
     {
-
+        _driverPoint.GiveUp();
+        _state = State.FarePaid;
+        GoToSeat();
     }
 
     public void GoToSeat()
@@ -179,7 +175,7 @@ public class Passenger : MonoBehaviour
 
     public void Left()
     {
-
+        _destination = Destination.ToExit;
     }
 
     public void SetDataLine(Transform doorPoint, Seat driverPoint, Seat seat, List<Transform> controlPointList)
@@ -200,10 +196,12 @@ public class Passenger : MonoBehaviour
     private enum Destination
     {
         None,
+        ToBack,
         ToBus,
         ToDriver,
         ToSeat,
-        ToExit
+        ToExit,
+        ToDisappear
     }
 
     public enum State

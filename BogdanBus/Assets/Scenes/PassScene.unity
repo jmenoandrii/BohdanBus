@@ -228,37 +228,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11579875}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &12353812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 12353813}
-  m_Layer: 0
-  m_Name: point2
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &12353813
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12353812}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1227272946}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &23667363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1149,6 @@ Transform:
   - {fileID: 2051899749}
   - {fileID: 11579876}
   - {fileID: 1188240569}
-  - {fileID: 1227272946}
   - {fileID: 1626583261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1433,37 +1401,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252407824}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &283059867
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 283059868}
-  m_Layer: 0
-  m_Name: point2
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &283059868
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283059867}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 611706588}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &291248898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,10 +1727,9 @@ MonoBehaviour:
   _passengerPool: {fileID: 1271310616}
   _deltaSpeed: 0.2
   _currentBusStop: {fileID: 0}
-  _passengers: []
+  _passengerList: []
   _boardingPassengerList: []
   _payingPassengerList: []
-  _validatedPassengerList: []
 --- !u!1 &339483579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,39 +2847,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &611706587
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 611706588}
-  m_Layer: 0
-  m_Name: BusStopPointPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &611706588
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611706587}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3, y: -3.83, z: -1.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 828967110}
-  - {fileID: 283059868}
-  m_Father: {fileID: 1266327229}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697549831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,37 +3397,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770362435}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &780628434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 780628435}
-  m_Layer: 0
-  m_Name: point1
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &780628435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780628434}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -5.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2069624528}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806359740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,9 +3444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _passengers: []
-  _disappearedPointPool: {fileID: 611706588}
-  _disappearedPointList: []
+  _passengerList: []
 --- !u!65 &806359743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3646,37 +3516,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806359740}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &828967109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 828967110}
-  m_Layer: 0
-  m_Name: point1
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &828967110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828967109}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -5.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 611706588}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873260532
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,8 +4324,11 @@ MonoBehaviour:
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
+  _disappearDistance: 2
+  _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
+  _disappearePosition: {x: 0, y: 0, z: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -4955,13 +4797,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doorMark: 0
-  _busStopOfDestination: {fileID: 0}
+  _doorMark: 1
+  _busStopOfDestination: {fileID: 806359742}
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
+  _disappearDistance: 2
+  _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
+  _disappearePosition: {x: 0, y: 0, z: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -5613,39 +5458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTaken: 0
---- !u!1 &1227272945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1227272946}
-  m_Layer: 0
-  m_Name: BusStopPointPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1227272946
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227272945}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3, y: -3.83, z: -1.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1774097511}
-  - {fileID: 12353813}
-  m_Father: {fileID: 182677645}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1232821269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5996,7 +5808,6 @@ Transform:
   - {fileID: 1275211058}
   - {fileID: 1402128002}
   - {fileID: 1294214400}
-  - {fileID: 611706588}
   - {fileID: 806359741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -6538,13 +6349,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e00b45ec24c4a9124fb079f25b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doorMark: 0
+  _doorMark: 1
   _busStopOfDestination: {fileID: 1808129608}
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
+  _disappearDistance: 2
+  _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
+  _disappearePosition: {x: 0, y: 0, z: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -6750,7 +6564,6 @@ Transform:
   - {fileID: 2035773409}
   - {fileID: 538534917}
   - {fileID: 1621884817}
-  - {fileID: 2069624528}
   - {fileID: 1808129607}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -7009,13 +6822,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _passengers:
+  _passengerList:
   - {fileID: 998828248}
   - {fileID: 1496876558}
   - {fileID: 1915000883}
   - {fileID: 1159329959}
-  _disappearedPointPool: {fileID: 1227272946}
-  _disappearedPointList: []
 --- !u!1 &1670446369
 GameObject:
   m_ObjectHideFlags: 0
@@ -7061,37 +6872,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTaken: 0
---- !u!1 &1674071038
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1674071039}
-  m_Layer: 0
-  m_Name: point2
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1674071039
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674071038}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2069624528}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1680648096
 GameObject:
   m_ObjectHideFlags: 0
@@ -7885,37 +7665,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765575149}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1774097510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1774097511}
-  m_Layer: 0
-  m_Name: point1
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1774097511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774097510}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -5.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1227272946}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1779104896
 GameObject:
   m_ObjectHideFlags: 0
@@ -8206,9 +7955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9ccbc466842a6902acc60879cb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _passengers: []
-  _disappearedPointPool: {fileID: 2069624528}
-  _disappearedPointList: []
+  _passengerList: []
 --- !u!65 &1808129609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8774,8 +8521,11 @@ MonoBehaviour:
   _speed: 2
   _deltaBottom: 0.5
   _deltaForward: 2
+  _disappearDistance: 2
+  _startPosition: {x: 0, y: 0, z: 0}
   _doorPoint: {fileID: 0}
   _exitPoint: {fileID: 0}
+  _disappearePosition: {x: 0, y: 0, z: 0}
   _driverPoint: {fileID: 0}
   _seatPoint: {fileID: 0}
   _controlPointList: []
@@ -9508,39 +9258,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1180944958}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2069624527
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2069624528}
-  m_Layer: 0
-  m_Name: BusStopPointPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2069624528
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069624527}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3004954, y: -3.83, z: -1.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 780628435}
-  - {fileID: 1674071039}
-  m_Father: {fileID: 1578164480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2083996671
 GameObject:
