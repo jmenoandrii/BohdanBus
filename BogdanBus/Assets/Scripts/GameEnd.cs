@@ -9,6 +9,7 @@ public class GameEnd : MonoBehaviour
     [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
     [SerializeField] EndBus _endBus;
+    [SerializeField] GameObject _hellTunnel;
     public static GameEnd Singletone;
 
     [Header("*** View zone ***")]
@@ -94,18 +95,29 @@ public class GameEnd : MonoBehaviour
         _endScreenAnimator.SetBool("isShiftEnd", true);
     }
 
-    private void WayToHell()
+    public void StartWayToHell()
     {
         if (_peopleCount == 0)
         {
-            Debug.Log("END -> WayToHell");
+            Debug.Log("END -> WayToHell (start)");
 
+            _hellTunnel.SetActive(true);
         }
+    }
+
+    public void FinishWayToHell()
+    {
+        Debug.Log("END -> WayToHell (finish)");
+
+        Bus bus = _busSystem.GetComponent<Bus>();
+        bus.ForceStop();
+
+        _endScreenAnimator.SetBool("isWayToHell", true);
     }
 
     private void StartDeath()
     {
-        Debug.Log("END -> Death");
+        Debug.Log("END -> Death (start)");
 
         Bus bus = _busSystem.GetComponent<Bus>();
         bus.ForceStop();
@@ -116,6 +128,8 @@ public class GameEnd : MonoBehaviour
 
     public void FinshDeath()
     {
+        Debug.Log("END -> Death (finish)");
+
         _endScreenAnimator.SetBool("isDead", true);
     }
 }
