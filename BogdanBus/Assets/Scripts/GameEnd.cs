@@ -6,8 +6,9 @@ public class GameEnd : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] BoardingSystem _busSystem;
-    [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
+    [SerializeField] EndBus _endBus;
+    [SerializeField] GameObject _hellTunnel;
     public static GameEnd Singletone;
 
     [Header("*** View zone ***")]
@@ -38,7 +39,7 @@ public class GameEnd : MonoBehaviour
         _monstersCount++; 
     }
 
-    public void PerformeEndBusStop()
+    /*public void PerformeEndBusStop()
     {
         if (_peopleCount > 0 && _monstersCount > 0)
         {
@@ -52,6 +53,18 @@ public class GameEnd : MonoBehaviour
         {
             WayToHell();
         }
+    }*/
+
+    public void BusStopEnding()
+    {
+        if (_peopleCount > 0 && _monstersCount > 0)
+        {
+            StartDeath();
+        }
+        else if (_monstersCount == 0)
+        {
+            StartWorkShiftEnd();
+        }
     }
 
     private void YouAreFired()
@@ -64,21 +77,58 @@ public class GameEnd : MonoBehaviour
         _endScreenAnimator.SetBool("youAreFired", true);
     }
 
-    private void WorkShiftEnd()
+    private void StartWorkShiftEnd()
     {
-        Debug.Log("END -> WorkShiftEnd");
-    }
-
-    private void WayToHell()
-    {
-        Debug.Log("END -> WayToHell");
-    }
-
-    private void Death()
-    {
-        Debug.Log("END -> Death");
+        Debug.Log("END -> WorkShiftEnd (start)");
 
         Bus bus = _busSystem.GetComponent<Bus>();
         bus.ForceStop();
+
+        _busSystem.StartForceFreeSalon();
+    }
+
+    public void FinishWorkShiftEnd()
+    {
+        Debug.Log("END -> WorkShiftEnd (finish)");
+
+        _endScreenAnimator.SetBool("isShiftEnd", true);
+    }
+
+    public void StartWayToHell()
+    {
+        if (_peopleCount == 0)
+        {
+            Debug.Log("END -> WayToHell (start)");
+
+            _hellTunnel.SetActive(true);
+        }
+    }
+
+    public void FinishWayToHell()
+    {
+        Debug.Log("END -> WayToHell (finish)");
+
+        Bus bus = _busSystem.GetComponent<Bus>();
+        bus.ForceStop();
+
+        _endScreenAnimator.SetBool("isWayToHell", true);
+    }
+
+    private void StartDeath()
+    {
+        Debug.Log("END -> Death (start)");
+
+        Bus bus = _busSystem.GetComponent<Bus>();
+        bus.ForceStop();
+
+        _endBus.gameObject.SetActive(true);
+        _endBus.StartCrashing();
+    }
+
+    public void FinshDeath()
+    {
+        Debug.Log("END -> Death (finish)");
+
+        _endScreenAnimator.SetBool("isDead", true);
     }
 }
