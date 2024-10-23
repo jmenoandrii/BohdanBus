@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Gearbox : MonoBehaviour, IInteractableObject
 {
     [SerializeField]

@@ -10,6 +10,12 @@ public class BusStop : MonoBehaviour
 
     [Header("*** View zone ***")]
     [SerializeField] private bool _isVisited = false;
+    private bool _hasPassengers = false;
+
+    private void Start()
+    {
+        _hasPassengers = _passengerList.Count > 0;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,7 +46,7 @@ public class BusStop : MonoBehaviour
 
     public void CheckMissed()
     {
-        if (_isVisited && _passengerList.Count > 0)
+        if (!_isVisited || (_hasPassengers && _passengerList.Count > 0))
         {
             ClearPassenger();
             GameEnd.Singletone.AddMissedStop();
