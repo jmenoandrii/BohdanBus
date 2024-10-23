@@ -34,7 +34,7 @@ public class Door : MonoBehaviour
         _isOpen = true;
         _animation.Play(_doorOpenAnim.name);
 
-        // ~~~ audio ~~~
+        // ~~~ audio (open) ~~~
         if (_audioDoorClose.isPlaying)
             _audioDoorClose.Stop();
 
@@ -47,7 +47,7 @@ public class Door : MonoBehaviour
         _isOpen = false;
         _animation.Play(_doorCloseAnim.name);
 
-        // ~~~ audio ~~~
+        // ~~~ audio (close) ~~~
         if (_audioDoorOpen.isPlaying)
             _audioDoorOpen.Stop();
 

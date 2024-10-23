@@ -22,7 +22,7 @@ public class TicketPrinter : MonoBehaviour, IInteractableObject
             {
                 _state = State.Printed;
 
-                // ~~~ audio ~~~
+                // ~~~ audio (print) ~~~
                 if (_audioRip.isPlaying)
                     _audioRip.Stop();
 
@@ -33,7 +33,7 @@ public class TicketPrinter : MonoBehaviour, IInteractableObject
             {
                 _state = State.Returned;
 
-                // ~~~ audio ~~~
+                // ~~~ audio (rip) ~~~
                 if (_audioPrint.isPlaying)
                     _audioPrint.Stop();
 

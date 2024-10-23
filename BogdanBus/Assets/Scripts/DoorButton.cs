@@ -22,7 +22,7 @@ public class DoorButton : MonoBehaviour, IInteractableObject
         if (!_animation.isPlaying)
             _animation.Play();
         
-        // ~~~ audio ~~~
+        // ~~~ audio (press) ~~~
         if (_audioPress.isPlaying)
             _audioPress.Stop();
         _audioPress.Play();
