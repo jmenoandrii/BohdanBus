@@ -41,7 +41,12 @@ public class BoardingSystem : MonoBehaviour
     public float BusSpeed => _bus.CurrentSpeed;
     public BusStop CurrentBusStop => _currentBusStop;
     // Setters
-    public void StartForceFreeSalon() { _isForceFreeSalon = true; }
+    public void StartForceFreeSalon() 
+    {
+        _frontDoor.Open();
+        _backDoor.Open();
+        _isForceFreeSalon = true; 
+    }
 
     private void Awake()
     {
