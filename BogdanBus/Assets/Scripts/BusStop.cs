@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +8,21 @@ public class BusStop : MonoBehaviour
     [SerializeField] private List<Passenger> _passengerList;
     private BoardingSystem _busSystem;
 
+    [Header("*** View zone ***")]
+    [SerializeField] private bool _isVisited = false;
+    private bool _hasPassengers = false;
+
+    private void Start()
+    {
+        _hasPassengers = _passengerList.Count > 0;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out BoardingSystem busSystem))
         {
+            _isVisited = true;
+
             _busSystem = busSystem;
             _busSystem.SetCurrentBusStop(this);
 
@@ -29,6 +41,15 @@ public class BusStop : MonoBehaviour
         {
             _busSystem.ClearCurrentBusStop();
             _busSystem = null;
+        }
+    }
+
+    public void CheckMissed()
+    {
+        if (!_isVisited || (_hasPassengers && _passengerList.Count > 0))
+        {
+            ClearPassenger();
+            GameEnd.Singletone.AddMissedStop();
         }
     }
 
@@ -56,8 +77,27 @@ public class BusStop : MonoBehaviour
     public void ForgetAboutPassenger(Passenger passenger)
     {
         /*
-            If the bus sends a command that all passengers boarded
+            If the bus sends a command that the passengers boarded
          */
         _passengerList.Remove(passenger);
+    }
+
+    public void ClearPassenger()
+    {
+        /* 
+            bus stop is missed
+         */
+        foreach (Passenger passenger in _passengerList)
+        {
+            passenger.gameObject.SetActive(false);
+        }
+        _passengerList.Clear();
+    }
+
+    public enum State
+    {
+        None,
+        IsMissed,
+        IsDone
     }
 }

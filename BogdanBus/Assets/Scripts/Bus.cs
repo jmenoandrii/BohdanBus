@@ -18,6 +18,8 @@ public class Bus : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField]
+    private bool _isAbleToMove;
+    [SerializeField]
     private float _acceleration = 500f;
     [SerializeField]
     private float _breakeForce = 300f;
@@ -26,6 +28,8 @@ public class Bus : MonoBehaviour
 
     [SerializeField]
     private float _brakeSmoothing = 3f;
+    [SerializeField]
+    private float forceBrakeMultiplier = 6f;
 
     [SerializeField]
     private float _maxSpeed = 120f;
@@ -52,22 +56,31 @@ public class Bus : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public Gear GearState { get => _gear; }
+    
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _isAbleToMove = true;
     }
 
     private void FixedUpdate()
     {
-        _controlAxis = Input.GetAxis("Vertical");
-        _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
+        if (_isAbleToMove)
+        {
+            _controlAxis = Input.GetAxis("Vertical");
+            _currentSpeed = _rigidbody.velocity.magnitude * 3.6f;
 
-        PedalChecking();
+            PedalChecking();
 
-        Acceleration();
-        Breaking();
-        Turning();
+            Acceleration();
+            Braking();
+            Turning();
+        }
+        else
+        {
+            ForcedBraking();
+        }
     }
 
     private void PedalChecking()
@@ -112,7 +125,7 @@ public class Bus : MonoBehaviour
         _frontRightWheel.motorTorque = Mathf.Lerp(_frontRightWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
     }
 
-    private void Breaking()
+    private void Braking()
     {
         if (_gear == Gear.Park)
         {
@@ -155,6 +168,32 @@ public class Bus : MonoBehaviour
         _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
+    public void ForceStop() { _isAbleToMove = false; }
+
+
+    private void ForcedBraking()
+    {
+        // Set a very high braking force for immediate stop
+        float adjustedBrakeForce = _breakeForce * forceBrakeMultiplier;
+
+        // Set the current braking force to the adjusted braking force
+        _curBreakingForce = adjustedBrakeForce;
+
+        // Adjust front and rear brake force proportions if necessary
+        float frontBrakeForce = _curBreakingForce * 0.8f; // More force to front wheels
+        float rearBrakeForce = _curBreakingForce * 0.2f; // Less force to rear wheels
+
+        // Apply the brake torque to the wheels
+        _frontLeftWheel.brakeTorque = frontBrakeForce;
+        _frontRightWheel.brakeTorque = frontBrakeForce;
+        _backLeftWheel.brakeTorque = rearBrakeForce;
+        _backRightWheel.brakeTorque = rearBrakeForce;
+
+        // Optionally, reset the bus velocity if using Rigidbody
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 5f); // Smoothly reduce velocity
+        rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * 5f); // Smoothly reduce angular velocity
+    }
 
     private void Turning()
     {
