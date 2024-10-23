@@ -7,12 +7,25 @@ using UnityEngine;
 public class Speedometer : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshPro _textMesh;
+    private Transform _speedometerArrow;
     [SerializeField]
     private Bus _bus;
 
-    void Update()
+    private float _minAngle = 60f;
+    private float _maxAngle = 300f;
+
+    private int _minSpeed = 0;
+    private int _maxSpeed = 80;
+
+    private void Update()
     {
-        _textMesh.text = Mathf.RoundToInt(_bus.CurrentSpeed).ToString();
+        _speedometerArrow.localRotation = Quaternion.Euler(0f, GetAngle(Mathf.RoundToInt(_bus.CurrentSpeed)), 0f);
+    }
+
+    private float GetAngle(int i)
+    {
+        i = Mathf.Clamp(i, _minSpeed, _maxSpeed);
+
+        return Mathf.Lerp(_minAngle, _maxAngle, (float)(i - _minSpeed) / (_maxSpeed - _minSpeed));
     }
 }
