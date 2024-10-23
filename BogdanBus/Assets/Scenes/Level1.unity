@@ -28656,8 +28656,8 @@ MonoBehaviour:
   _endScreenAnimator: {fileID: 104369141}
   _endBus: {fileID: 406873251}
   _missedStopCount: 0
-  _peopleCount: 1
-  _monstersCount: 1
+  _peopleCount: 0
+  _monstersCount: 0
 --- !u!4 &2097140435
 Transform:
   m_ObjectHideFlags: 0
