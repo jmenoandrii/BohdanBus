@@ -8,6 +8,7 @@ public class GameEnd : MonoBehaviour
     [SerializeField] BoardingSystem _busSystem;
     [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
+    [SerializeField] EndBus _endBus;
     public static GameEnd Singletone;
 
     [Header("*** View zone ***")]
@@ -58,7 +59,7 @@ public class GameEnd : MonoBehaviour
     {
         if (_peopleCount > 0 && _monstersCount > 0)
         {
-            Death();
+            StartDeath();
         }
         else if (_monstersCount == 0)
         {
@@ -98,14 +99,23 @@ public class GameEnd : MonoBehaviour
         if (_peopleCount == 0)
         {
             Debug.Log("END -> WayToHell");
+
         }
     }
 
-    private void Death()
+    private void StartDeath()
     {
         Debug.Log("END -> Death");
 
         Bus bus = _busSystem.GetComponent<Bus>();
         bus.ForceStop();
+
+        _endBus.gameObject.SetActive(true);
+        _endBus.StartCrashing();
+    }
+
+    public void FinshDeath()
+    {
+        _endScreenAnimator.SetBool("isDead", true);
     }
 }

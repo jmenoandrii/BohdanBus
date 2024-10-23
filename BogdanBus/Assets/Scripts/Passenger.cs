@@ -19,7 +19,6 @@ public class Passenger : MonoBehaviour
     [SerializeField] private float _deltaBottom = 0.5f;
     [SerializeField] private float _deltaForward = 1f;
     [SerializeField] private float _disappearDistance = 2f;
-    private Vector3 targetPosition;
 
     [Header("*** View zone ***")]
     // Bus points
@@ -85,11 +84,9 @@ public class Passenger : MonoBehaviour
 
     private void MoveTo(Vector3 target)
     {
-        targetPosition = target;
+        Vector3 direction = (target - transform.position).normalized;
 
-        Vector3 direction = (targetPosition - transform.position).normalized;
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, _speed * Time.deltaTime);
                    
         if (direction != Vector3.zero)
         {              
@@ -103,7 +100,7 @@ public class Passenger : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, smoothRotation, Time.deltaTime * _speed * 2);                                           
         }
 
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, target) < 0.1f)
         {
             switch (_destination)
             {
