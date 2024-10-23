@@ -18,7 +18,6 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private TicketPrinter _ticketPrinter;
     [SerializeField] private GameObject _passengerPool;
     [SerializeField] private float _deltaSpeed = 0.2f;
-    [SerializeField] private GameEnd _gameEnd;
 
     [Header("*** View zone ***")]
     [SerializeField] private BusStop _currentBusStop;
@@ -27,6 +26,7 @@ public class BoardingSystem : MonoBehaviour
     [SerializeField] private List<Passenger> _payingPassengerList = new List<Passenger>();
     private List<Transform> _controlPointList = new List<Transform>();
     private Bus _bus;
+    [SerializeField] private bool _isForceFreeSalon;
 
     // Getters
     public bool IsOpenFrontDoor => _frontDoor.IsOpen;
@@ -40,6 +40,8 @@ public class BoardingSystem : MonoBehaviour
     public List<Transform> ControlPointList => _controlPointList;
     public float BusSpeed => _bus.CurrentSpeed;
     public BusStop CurrentBusStop => _currentBusStop;
+    // Setters
+    public void StartForceFreeSalon() { _isForceFreeSalon = true; }
 
     private void Awake()
     {
@@ -49,8 +51,15 @@ public class BoardingSystem : MonoBehaviour
 
     private void Update()
     {
-        HandleBoardingPassengers();
-        HandlePassengers();
+        if (!_isForceFreeSalon)
+        {
+            HandleBoardingPassengers();
+            HandlePassengers();
+        }
+        else
+        {
+            FreeBusSalon();
+        }
     }
 
     private void HandleBoardingPassengers()
@@ -87,9 +96,9 @@ public class BoardingSystem : MonoBehaviour
                 _currentBusStop.ForgetAboutPassenger(passenger);
 
                 if (passenger.IsHuman)
-                    _gameEnd.AddHuman();
+                    GameEnd.Singletone.AddHuman();
                 else
-                    _gameEnd.AddMonster();
+                    GameEnd.Singletone.AddMonster();
             }
         }
     }
@@ -112,9 +121,10 @@ public class BoardingSystem : MonoBehaviour
          */
         if (_passengerList.Count == 0) return;
 
+        Passenger passenger;
         for (int i = 0; i < _passengerList.Count; i++)
         {
-            var passenger = _passengerList[i];
+            passenger = _passengerList[i];
 
             if (_currentBusStop != null && passenger.GetDestination == _currentBusStop && CanPassengerEnterOrExit(passenger))
             {
@@ -144,6 +154,31 @@ public class BoardingSystem : MonoBehaviour
                 passenger.GoToSeat();
             }
         }
+    }
+
+    private void FreeBusSalon()
+    {
+        Passenger passenger;
+        for (int i = 0; i < _passengerList.Count; i++)
+        {
+            passenger = _passengerList[i];
+
+            if (passenger.GetState == Passenger.State.LeftBus)
+            {
+                _passengerList.RemoveAt(i--);
+                passenger.transform.SetParent(null);
+                continue;
+            }
+
+            passenger.Left();
+        }
+
+        if (_passengerList.Count == 0)
+        {
+            GameEnd.Singletone.FinishWorkShiftEnd();
+            _isForceFreeSalon = false;
+        }
+
     }
 
     private bool CanPassengerEnterOrExit(Passenger passenger)

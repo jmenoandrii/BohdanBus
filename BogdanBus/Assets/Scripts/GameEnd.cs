@@ -38,7 +38,7 @@ public class GameEnd : MonoBehaviour
         _monstersCount++; 
     }
 
-    public void PerformeEndBusStop()
+    /*public void PerformeEndBusStop()
     {
         if (_peopleCount > 0 && _monstersCount > 0)
         {
@@ -52,6 +52,18 @@ public class GameEnd : MonoBehaviour
         {
             WayToHell();
         }
+    }*/
+
+    public void BusStopEnding()
+    {
+        if (_peopleCount > 0 && _monstersCount > 0)
+        {
+            Death();
+        }
+        else if (_monstersCount == 0)
+        {
+            StartWorkShiftEnd();
+        }
     }
 
     private void YouAreFired()
@@ -64,14 +76,29 @@ public class GameEnd : MonoBehaviour
         _endScreenAnimator.SetBool("youAreFired", true);
     }
 
-    private void WorkShiftEnd()
+    private void StartWorkShiftEnd()
     {
-        Debug.Log("END -> WorkShiftEnd");
+        Debug.Log("END -> WorkShiftEnd (start)");
+
+        Bus bus = _busSystem.GetComponent<Bus>();
+        bus.ForceStop();
+
+        _busSystem.StartForceFreeSalon();
+    }
+
+    public void FinishWorkShiftEnd()
+    {
+        Debug.Log("END -> WorkShiftEnd (finish)");
+
+        _endScreenAnimator.SetBool("isShiftEnd", true);
     }
 
     private void WayToHell()
     {
-        Debug.Log("END -> WayToHell");
+        if (_peopleCount == 0)
+        {
+            Debug.Log("END -> WayToHell");
+        }
     }
 
     private void Death()
