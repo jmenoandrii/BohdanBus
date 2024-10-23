@@ -20,6 +20,12 @@ public class Passenger : MonoBehaviour
     [SerializeField] private float _deltaForward = 1f;
     [SerializeField] private float _disappearDistance = 2f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource _audioWalkOutside;
+    [SerializeField] private AudioSource _audioWalkInside;
+    [SerializeField] private AudioSource _audioSitting;
+    private AudioSource _currentAudio;
+
     [Header("*** View zone ***")]
     // Bus points
     [SerializeField] private Vector3 _startPosition;
@@ -51,11 +57,18 @@ public class Passenger : MonoBehaviour
     private void Moving()
     {
         if (_destination == Destination.None)
+        {
+            // ~~~ audio (stop sound) ~~~
+            SetCurrentSound(null);
             return;
+        }
 
         if (_destination == Destination.ToBack)         // GoBack
         {
             MoveTo(_startPosition);
+
+            // ~~~ audio (Walk Outside) ~~~
+            SetCurrentSound(_audioWalkOutside);
         }
         else if (_state == State.BusAccessible)         // GoToBus
         {
@@ -63,22 +76,37 @@ public class Passenger : MonoBehaviour
                 MoveTo(_doorPoint.position - Vector3.up * _deltaBottom);
             else
                 MoveTo(_doorPoint.position);
+
+            // ~~~ audio (Walk Outside) ~~~
+            SetCurrentSound(_audioWalkOutside);
         }
         else if (_destination == Destination.ToDriver)  // GoToDriver
         {
             MoveTo(_driverPoint.transform.position);
+
+            // ~~~ audio (Walk Inside) ~~~
+            SetCurrentSound(_audioWalkInside);
         }
         else if (_destination == Destination.ToSeat)    // GoToSeat
         {
             MoveTo(_seatPoint.transform.position);
+
+            // ~~~ audio (Walk Inside) ~~~
+            SetCurrentSound(_audioWalkInside);
         }
         else if (_destination == Destination.ToExit)    // GoToExitDoor
         {
             MoveTo(_state != State.LeftBus ? _doorPoint.position : _exitPoint.position);
+
+            // ~~~ audio (Walk Inside) ~~~
+            SetCurrentSound(_audioWalkInside);
         }
         else if (_destination == Destination.ToVanishing)
         {
             MoveTo(_vanishingPoint.position);
+
+            // ~~~ audio (Walk Outside) ~~~
+            SetCurrentSound(_audioWalkOutside);
         }
     }
 
@@ -111,12 +139,16 @@ public class Passenger : MonoBehaviour
                     _state = State.InBus;
                     break;
                 case Destination.ToDriver:
+                    _destination = Destination.None;
                     _driverPoint.Take();
                     _state = State.Paying;
                     break;
                 case Destination.ToSeat:
+                    _destination = Destination.None;
                     _state = State.Sitting;
                     transform.rotation = Quaternion.Euler(0, _seatPoint.transform.rotation.eulerAngles.y, 0); // forwardRotation
+                    // ~~~ audio (sitting) ~~~
+                    _audioSitting.Play();
                     break;
                 case Destination.ToExit:
                     if (_state != State.LeftBus)
@@ -129,6 +161,16 @@ public class Passenger : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void SetCurrentSound(AudioSource audio)
+    {
+        if (_currentAudio == audio)
+            return;
+
+        _currentAudio?.Stop();
+        _currentAudio = audio;
+        audio?.Play();
     }
 
     public void GoBack()

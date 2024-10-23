@@ -10,7 +10,7 @@ public class DoorButton : MonoBehaviour, IInteractableObject
     private Animation _animation;
 
     [Header("Sounds")]
-    [SerializeField] AudioSource _audioPress;
+    [SerializeField] private AudioSource _audioPress;
 
     private void Awake()
     {
