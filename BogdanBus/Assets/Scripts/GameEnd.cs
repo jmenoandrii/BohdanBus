@@ -6,7 +6,6 @@ public class GameEnd : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] BoardingSystem _busSystem;
-    [SerializeField] Trigger _endBusStopTrigger;
     [SerializeField] Animator _endScreenAnimator;
     [SerializeField] EndBus _endBus;
     [SerializeField] GameObject _hellTunnel;
