@@ -25,6 +25,8 @@ public class Bus : MonoBehaviour
     private float _breakeForce = 300f;
     [SerializeField]
     private float _maxTurnAngle = 15f;
+    [SerializeField]
+    private float _maxWheelAngle = 15f;
 
     [SerializeField]
     private float _brakeSmoothing = 3f;
@@ -42,21 +44,34 @@ public class Bus : MonoBehaviour
     [SerializeField]
     private Gear _gear = Gear.Park;
 
+    [SerializeField]
+    private Transform _steeringWheelTransform;
+
     private float _curAcceleration;
     private float _curBreakingForce;
     private float _curTurnAngle;
 
+    [SerializeField] private Transform _acceleratorPedal;
+    [SerializeField] private Transform _brakePedal;
+
+    private Vector3 _acceleratorStartPos;
+    private Vector3 _brakeStartPos;
+    [SerializeField] private Vector3 _acceleratorEndPos;
+    [SerializeField] private Vector3 _brakeEndPos;
+
     [SerializeField]
     private bool _isBrakingPedal;
     [SerializeField]
-    private bool _isAcceleratingPedal;
+    private bool _isAcceleratorPedal;
 
     private float _controlAxis;
 
     private Rigidbody _rigidbody;
 
     public Gear GearState { get => _gear; }
-    
+
+    [SerializeField] private AudioSource _audioEngine;
+
 
     private void Awake()
     {
@@ -85,8 +100,20 @@ public class Bus : MonoBehaviour
 
     private void PedalChecking()
     {
-        _isAcceleratingPedal = _controlAxis > 0.5f;
+        _isAcceleratorPedal = _controlAxis > 0.5f;
         _isBrakingPedal = _controlAxis < -0.5f;
+
+        _acceleratorPedal.localPosition = Vector3.Lerp(
+            _acceleratorStartPos,
+            _acceleratorEndPos,
+            Mathf.Clamp01(_controlAxis)
+        );
+
+        _brakePedal.localPosition = Vector3.Lerp(
+            _brakeStartPos,
+            _brakeEndPos,
+            Mathf.Clamp01(-_controlAxis)
+        );
     }
 
     private void Acceleration()
@@ -120,6 +147,9 @@ public class Bus : MonoBehaviour
                 _curAcceleration = Mathf.Lerp(_curAcceleration, -_acceleration * _controlAxis, Time.deltaTime * 2f);
             }
         }
+
+        float normalizedSpeed = Mathf.InverseLerp(0, _maxSpeed, _currentSpeed);
+        _audioEngine.pitch = Mathf.Lerp(0.8f, 1.4f, normalizedSpeed);
 
         _frontLeftWheel.motorTorque = Mathf.Lerp(_frontLeftWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
         _frontRightWheel.motorTorque = Mathf.Lerp(_frontRightWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
@@ -168,7 +198,10 @@ public class Bus : MonoBehaviour
         _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
-    public void ForceStop() { _isAbleToMove = false; }
+    public void ForceStop() { 
+        _isAbleToMove = false;
+        _audioEngine.Stop();
+    }
 
 
     private void ForcedBraking()
@@ -197,10 +230,14 @@ public class Bus : MonoBehaviour
 
     private void Turning()
     {
-        _curTurnAngle = _maxTurnAngle * Input.GetAxis("Horizontal");
+        _curTurnAngle = _maxWheelAngle * Input.GetAxis("Horizontal");
+
+        //_curTurnAngle = Mathf.Clamp(_curTurnAngle, -_maxWheelAngle, _maxWheelAngle);
 
         _frontLeftWheel.steerAngle = _curTurnAngle;
         _frontRightWheel.steerAngle = _curTurnAngle;
+
+        _steeringWheelTransform.localRotation = Quaternion.Euler(0f, 0f, _curTurnAngle * 3f);
     }
 
     public bool ShiftGear(Gear newGear)

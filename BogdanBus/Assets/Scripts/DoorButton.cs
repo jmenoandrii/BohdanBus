@@ -9,6 +9,9 @@ public class DoorButton : MonoBehaviour, IInteractableObject
     private Door[] _doors;
     private Animation _animation;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource _audioPress;
+
     private void Awake()
     {
         _animation = GetComponent<Animation>();
@@ -18,7 +21,12 @@ public class DoorButton : MonoBehaviour, IInteractableObject
     {
         if (!_animation.isPlaying)
             _animation.Play();
-            
+        
+        // ~~~ audio (press) ~~~
+        if (_audioPress.isPlaying)
+            _audioPress.Stop();
+        _audioPress.Play();
+
         foreach (var door in _doors)
         {
             door.Interact(); 

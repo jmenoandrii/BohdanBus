@@ -9,7 +9,12 @@ public class GameEnd : MonoBehaviour
     [SerializeField] Animator _endScreenAnimator;
     [SerializeField] EndBus _endBus;
     [SerializeField] GameObject _hellTunnel;
+    [SerializeField] Radio _radio;
     public static GameEnd Singletone;
+
+    private bool _isGameEnded;
+
+    public bool IsGameEnd { get => _isGameEnded; }
 
     [Header("*** View zone ***")]
     // Counters
@@ -37,6 +42,12 @@ public class GameEnd : MonoBehaviour
     public void AddMonster() 
     { 
         _monstersCount++; 
+    }
+
+    private void EndHandler()
+    {
+        _isGameEnded = true;
+        _radio.ForceTurnOff();
     }
 
     /*public void PerformeEndBusStop()
@@ -69,6 +80,8 @@ public class GameEnd : MonoBehaviour
 
     private void YouAreFired()
     {
+        EndHandler();
+
         Debug.Log("END -> YouAreFired");
 
         Bus bus = _busSystem.GetComponent<Bus>();
@@ -79,6 +92,7 @@ public class GameEnd : MonoBehaviour
 
     private void StartWorkShiftEnd()
     {
+        EndHandler();
         Debug.Log("END -> WorkShiftEnd (start)");
 
         Bus bus = _busSystem.GetComponent<Bus>();
@@ -96,7 +110,7 @@ public class GameEnd : MonoBehaviour
 
     public void StartWayToHell()
     {
-        if (_peopleCount == 0)
+        if (_peopleCount == 0 && _monstersCount >= 0)
         {
             Debug.Log("END -> WayToHell (start)");
 
@@ -106,6 +120,7 @@ public class GameEnd : MonoBehaviour
 
     public void FinishWayToHell()
     {
+        EndHandler();
         Debug.Log("END -> WayToHell (finish)");
 
         Bus bus = _busSystem.GetComponent<Bus>();
@@ -116,6 +131,7 @@ public class GameEnd : MonoBehaviour
 
     private void StartDeath()
     {
+        EndHandler();
         Debug.Log("END -> Death (start)");
 
         Bus bus = _busSystem.GetComponent<Bus>();
