@@ -14,6 +14,8 @@ public class TicketPrinter : MonoBehaviour, IInteractableObject
     [SerializeField] AudioSource _audioPrint;
     [SerializeField] AudioSource _audioRip;
 
+    [SerializeField] private GameObject _ticket;
+
     public void Interact()
     {
         if (_driverPoint.IsTaken)
@@ -21,6 +23,8 @@ public class TicketPrinter : MonoBehaviour, IInteractableObject
             if (_state == State.Idle)
             {
                 _state = State.Printed;
+
+                _ticket.SetActive(true);
 
                 // ~~~ audio (print) ~~~
                 if (_audioRip.isPlaying)
@@ -32,6 +36,8 @@ public class TicketPrinter : MonoBehaviour, IInteractableObject
             else if (_state == State.Printed)
             {
                 _state = State.Returned;
+
+                _ticket.SetActive(false);
 
                 // ~~~ audio (rip) ~~~
                 if (_audioPrint.isPlaying)

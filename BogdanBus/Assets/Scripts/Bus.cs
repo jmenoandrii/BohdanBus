@@ -69,7 +69,9 @@ public class Bus : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public Gear GearState { get => _gear; }
-    
+
+    [SerializeField] private AudioSource _audioEngine;
+
 
     private void Awake()
     {
@@ -146,6 +148,9 @@ public class Bus : MonoBehaviour
             }
         }
 
+        float normalizedSpeed = Mathf.InverseLerp(0, _maxSpeed, _currentSpeed);
+        _audioEngine.pitch = Mathf.Lerp(0.8f, 1.4f, normalizedSpeed);
+
         _frontLeftWheel.motorTorque = Mathf.Lerp(_frontLeftWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
         _frontRightWheel.motorTorque = Mathf.Lerp(_frontRightWheel.motorTorque, _curAcceleration, Time.deltaTime * 3f);
     }
@@ -193,7 +198,10 @@ public class Bus : MonoBehaviour
         _backRightWheel.brakeTorque = rearBrakeForce;
     }
 
-    public void ForceStop() { _isAbleToMove = false; }
+    public void ForceStop() { 
+        _isAbleToMove = false;
+        _audioEngine.Stop();
+    }
 
 
     private void ForcedBraking()

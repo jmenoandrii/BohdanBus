@@ -14,6 +14,10 @@ public class Gearbox : MonoBehaviour, IInteractableObject
     private bool _isChange;
     private int _rotationCoef;
 
+    [SerializeField] private AudioSource _audioUpGear;
+    [SerializeField] private AudioSource _audioDownGear;
+
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -52,6 +56,11 @@ public class Gearbox : MonoBehaviour, IInteractableObject
         // Aniation
         if (_isChange)
         {
+            if (up)
+                _audioUpGear.Play();
+            else
+                _audioDownGear.Play();
+
             SetActiveCoef();
             _animator.SetInteger("rotationCoef", _rotationCoef);
         }

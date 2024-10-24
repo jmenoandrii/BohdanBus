@@ -19,10 +19,10 @@ public class Speedometer : MonoBehaviour
 
     private void Update()
     {
-        _speedometerArrow.localRotation = Quaternion.Euler(0f, GetAngle(Mathf.RoundToInt(_bus.CurrentSpeed)), 0f);
+        _speedometerArrow.localRotation = Quaternion.Euler(0f, GetAngle(_bus.CurrentSpeed), 0f);
     }
 
-    private float GetAngle(int i)
+    private float GetAngle(float i)
     {
         i = Mathf.Clamp(i, _minSpeed, _maxSpeed);
 
